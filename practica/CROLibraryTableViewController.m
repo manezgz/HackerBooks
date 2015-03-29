@@ -20,6 +20,7 @@
     if(self=[super initWithStyle:aStyle]){
         _model=aLibrary;
         self.title = @"Library";
+        _arrayOfTags=[self.model.dictOfTags allKeys];
     }
     return self;
 }
@@ -32,18 +33,20 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [self.arrayOfTags count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.model.booksCount;
+    NSString *tag=[self.arrayOfTags objectAtIndex:section];
+    return [[self.model.dictOfTags objectForKey:(tag)] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"BookCell";
     
-    
-    CROBook *book = [self.model.books objectAtIndex:indexPath.row];
+    CROBook *book = [self bookForIndexPath:(indexPath)];
     // Creamos una celda
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -58,6 +61,23 @@
     cell.textLabel.text =book.title;
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section{
+    return [self.arrayOfTags objectAtIndex:section];
+}
+
+- (CROBook *)bookForIndexPath:(NSIndexPath *)indexPath
+{
+    // Averiguamos de qué vino se trata
+    CROBook *book = nil;
+    
+    NSString *section=[self.arrayOfTags objectAtIndex:indexPath.section];
+    
+    book=[[self.model.dictOfTags valueForKey:(section)] objectAtIndex:(indexPath.row)];
+     
+    return book;
 }
 
 

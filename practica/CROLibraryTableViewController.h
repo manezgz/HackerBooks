@@ -12,6 +12,7 @@
 @interface CROLibraryTableViewController : UITableViewController
 
 @property(strong,nonatomic) CROLibraryModel *model;
+@property(strong,nonatomic) NSArray *arrayOfTags;
 
 -(id)initWithLibrary:(CROLibraryModel*)aLibrary
            withStyle:(UITableViewStyle) aStyle;
