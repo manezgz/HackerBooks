@@ -106,14 +106,15 @@
 
 -(void)addBook:(CROBook*)book toDictionary:(NSMutableDictionary*)dictionary{
     for(NSString *tag in book.tags){
-        if ([dictionary objectForKey:tag]==nil){
+        NSString *tagNormalized=[tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([dictionary objectForKey:tagNormalized]==nil){
             NSMutableArray *array=[[NSMutableArray alloc]init];
             [array addObject:book];
-            [dictionary setObject:array forKey:tag];
+            [dictionary setObject:array forKey:tagNormalized];
         }else{
-            NSMutableArray *array=[dictionary objectForKey:tag];
+            NSMutableArray *array=[dictionary objectForKey:tagNormalized];
             [array addObject:book];
-            [dictionary setObject:array forKey:tag];
+            [dictionary setObject:array forKey:tagNormalized];
         }
     }
 }

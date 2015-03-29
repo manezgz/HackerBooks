@@ -59,13 +59,20 @@
     NSData *imageData=[[NSData alloc]initWithContentsOfURL:(book.image)];
     cell.imageView.image = [UIImage imageWithData:(imageData)];
     cell.textLabel.text =book.title;
-    
+    cell.detailTextLabel.text=[book.authors componentsJoinedByString:@","];
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section{
     return [self.arrayOfTags objectAtIndex:section];
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForFooterInSection:(NSInteger)section{
+    NSString *tag=[self.arrayOfTags objectAtIndex:section];
+    int items=[[self.model.dictOfTags objectForKey:(tag)]count];
+    return [NSString stringWithFormat:@"%d items",items];
 }
 
 - (CROBook *)bookForIndexPath:(NSIndexPath *)indexPath
