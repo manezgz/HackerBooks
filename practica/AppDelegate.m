@@ -33,6 +33,8 @@
     }
     CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.library)
                                                                                        withStyle:UITableViewStylePlain];
+    
+
     self.window.rootViewController = tableVC;
     
     //Inicializamos el modelo con el array de books

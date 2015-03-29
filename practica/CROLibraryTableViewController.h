@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CROLibraryModel.h"
 
-@interface CROLibraryTableViewController : UITableViewController
+@interface CROLibraryTableViewController : UITableViewController<UITableViewDelegate>
 
 @property(strong,nonatomic) CROLibraryModel *model;
 @property(strong,nonatomic) NSArray *arrayOfTags;

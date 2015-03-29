@@ -21,6 +21,7 @@
         _model=aLibrary;
         self.title = @"Library";
         _arrayOfTags=[self.model.dictOfTags allKeys];
+        self.tableView.delegate=self;
     }
     return self;
 }
@@ -29,6 +30,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Table view data source
 
@@ -87,6 +89,12 @@ titleForFooterInSection:(NSInteger)section{
     return book;
 }
 
+#pragma mark -Table View Delegate
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Seleccionado un libro");
+}
 
 /*
 // Override to support conditional editing of the table view.
