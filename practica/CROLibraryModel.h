@@ -12,8 +12,9 @@
 @interface CROLibraryModel : NSObject
 
 @property(nonatomic,strong) NSArray *books;
+@property(nonatomic,strong) NSDictionary *dictOfTags;
 
--(id) initWithArray:(NSArray*)anArray;
+-(id) initWithArray:(NSArray*)anArray withDictionary:(NSDictionary*)dict;
 
 -(NSUInteger)	booksCount;
 

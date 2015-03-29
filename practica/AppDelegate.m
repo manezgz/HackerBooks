@@ -70,6 +70,7 @@
                                    inDomains:NSUserDomainMask]lastObject];
     
     NSMutableArray *auxArray=[[NSMutableArray alloc]init];
+    NSMutableDictionary *auxDictioanry=[[NSMutableDictionary alloc]init];
     
     for (id obj in arrayOfBooks) {
         if([obj isKindOfClass:[NSDictionary class]]){
@@ -89,17 +90,32 @@
             
             //Añadimos el libro al array
             [auxArray addObject:book];
+            [self addBook:(book) toDictionary:(auxDictioanry)];
             
         }
     }
     
-    self.library= [[CROLibraryModel alloc]initWithArray:auxArray];
+    self.library= [[CROLibraryModel alloc]initWithArray:auxArray withDictionary:auxDictioanry];
     
 }
 
 -(NSArray*) getObjectFromKey:(NSString*) key andDictionary:(NSDictionary*)dictionary{
     NSString *value=[dictionary objectForKey:key];
     return [value componentsSeparatedByString:@","];
+}
+
+-(void)addBook:(CROBook*)book toDictionary:(NSMutableDictionary*)dictionary{
+    for(NSString *tag in book.tags){
+        if ([dictionary objectForKey:tag]==nil){
+            NSMutableArray *array=[[NSMutableArray alloc]init];
+            [array addObject:book];
+            [dictionary setObject:array forKey:tag];
+        }else{
+            NSMutableArray *array=[dictionary objectForKey:tag];
+            [array addObject:book];
+            [dictionary setObject:array forKey:tag];
+        }
+    }
 }
 
 @end

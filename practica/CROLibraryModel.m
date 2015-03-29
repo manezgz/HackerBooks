@@ -10,9 +10,11 @@
 #import "CROBook.h"
 
 @implementation CROLibraryModel
--(id) initWithArray:(NSArray*)anArray{
+-(id) initWithArray:(NSArray*)anArray
+     withDictionary:(NSDictionary*)dict{
     if(self=[super init]){
         self.books=anArray;
+        self.dictOfTags=dict;
     }
     return self;
 }
@@ -22,42 +24,20 @@
 }
 
 -(NSArray*)	tags{
-    return nil;
+    return [self.dictOfTags allKeys];
 }
 
 -(NSUInteger)	bookCountForTag:(NSString*)	tag{
-    int result=0;
-    for(CROBook *book in self.books){
-        for(NSString *tagBook in book.tags){
-            if([tagBook isEqualToString:(tag)]){
-                result=result+1;
-            }
-        }
-    }
-    return result;
+    NSArray *array=[self.dictOfTags objectForKey:(tag)];
+    return [array count];
 }
 
 -(NSArray*)	booksForTag:	(NSString	*)	tag{
-    NSMutableArray *array=[[NSMutableArray alloc]init];
-    for(CROBook *book in self.books){
-        for(NSString *tagBook in book.tags){
-            if([tagBook isEqualToString:(tag)]){
-                [array addObject:book];
-            }
-        }
-    }
-    return array;
+    return [self.dictOfTags objectForKey:tag];
 }
 
--(CROBook*)	bookForTag:(NSString*)	tag	atIndex:(NSUInteger)	index{
-    NSMutableArray *array=[[NSMutableArray alloc]init];
-    for(CROBook *book in self.books){
-        for(NSString *tagBook in book.tags){
-            if([tagBook isEqualToString:(tag)]){
-                [array addObject:book];
-            }
-        }
-    }
+-(CROBook*)	bookForTag:(NSString*)	tag	atIndex:(NSUInteger)index{
+    NSArray *array=[self.dictOfTags objectForKey:(tag)];
     return [array objectAtIndex:index];
 }
 
