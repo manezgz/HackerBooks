@@ -33,9 +33,9 @@
     }
     CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.library)
                                                                                        withStyle:UITableViewStylePlain];
-    
+    UINavigationController *nav1=[[UINavigationController alloc]initWithRootViewController:tableVC];
 
-    self.window.rootViewController = tableVC;
+    self.window.rootViewController = nav1;
     
     //Inicializamos el modelo con el array de books
     NSLog(@"Number is %ld",(long)[self.library.books count]);

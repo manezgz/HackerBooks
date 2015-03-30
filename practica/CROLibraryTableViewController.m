@@ -7,6 +7,7 @@
 //
 
 #import "CROLibraryTableViewController.h"
+#import "BookViewController.h"
 
 @interface CROLibraryTableViewController ()
 
@@ -62,6 +63,7 @@
     cell.imageView.image = [UIImage imageWithData:(imageData)];
     cell.textLabel.text =book.title;
     cell.detailTextLabel.text=[book.authors componentsJoinedByString:@","];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -92,8 +94,9 @@ titleForFooterInSection:(NSInteger)section{
 #pragma mark -Table View Delegate
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Seleccionado un libro");
+{ 
+    BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self bookForIndexPath:(indexPath)])];
+    [self.navigationController pushViewController:vcBook animated:YES];
 }
 
 /*
