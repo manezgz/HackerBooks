@@ -11,13 +11,15 @@
 @implementation CROBook
 
 -(id) initWithTitle:(NSString *)title
-          withImageURL:(NSURL*)image
+       withImageURL:(NSURL*)image
+         withPDFURL:(NSURL*)pdf
         withAuthors:(NSArray*)authors
            withTags:(NSArray*)tags{
     
     if(self=[super init]){
         self.title=title;
         self.image=image;
+        self.pdf=pdf;
         self.authors=authors;
         self.tags=tags;
     }

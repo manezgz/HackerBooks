@@ -13,11 +13,13 @@
 
 @property(nonatomic,strong) NSString *title;
 @property(nonatomic,strong) NSURL *image;
+@property(nonatomic,strong) NSURL *pdf;
 @property(nonatomic,strong) NSArray *authors;
 @property(nonatomic,strong) NSArray *tags;
 
 -(id) initWithTitle:(NSString *)title
-          withImageURL:(NSURL*)image
+       withImageURL:(NSURL*)image
+         withPDFURL:(NSURL*)image
         withAuthors:(NSArray*)authors
            withTags:(NSArray*)tags;
 

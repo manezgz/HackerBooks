@@ -7,6 +7,8 @@
 //
 
 #import "BookViewController.h"
+#import "CROBookWebViewController.h"
+#import "CROLibraryTableViewController.h"
 
 @interface BookViewController ()
 
@@ -17,6 +19,7 @@
 -(id)initWithBook:(CROBook*)aBook{
     if(self=[super init]){
         _book=aBook;
+        self.title=self.book.title;
     }
     return self;
 }
@@ -44,6 +47,20 @@
     NSData *imageData=[[NSData alloc]initWithContentsOfURL:(self.book.image)];
     self.bookImage.image = [UIImage imageWithData:(imageData)];
     
+}
+
+- (IBAction)openPDF:(id)sender{
+    NSLog(@"Toco boton");
+    CROBookWebViewController *vcPDF=[[CROBookWebViewController alloc]initWitURL:(self.book.pdf)];
+    [self.navigationController pushViewController:vcPDF animated:YES];
+}
+
+#pragma mark Delegate
+- (void)libraryTableViewController:(CROLibraryTableViewController *)tableVC
+                   didSelectABook:(CROBook *)aBook{
+    NSLog(@"Delegado recibe peticion");
+    self.book=aBook;
+    [self synchronizeViewAndModel];
 }
 
 /*

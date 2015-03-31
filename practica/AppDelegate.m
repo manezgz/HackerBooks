@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CROLibraryTableViewController.h"
+#import "BookViewController.h"
 
 @interface AppDelegate ()
 
@@ -33,9 +34,18 @@
     }
     CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.library)
                                                                                        withStyle:UITableViewStylePlain];
-    UINavigationController *nav1=[[UINavigationController alloc]initWithRootViewController:tableVC];
+    BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self.library.books objectAtIndex:0])];
+    //Asignamos delegados
+    tableVC.delegate=vcBook;
+    
+    
+    UINavigationController *navLeft=[[UINavigationController alloc]initWithRootViewController:tableVC];
+    UINavigationController *navRight=[[UINavigationController alloc]initWithRootViewController:vcBook];
 
-    self.window.rootViewController = nav1;
+    
+    UISplitViewController *vcSplit=[[UISplitViewController alloc]init];
+    [vcSplit setViewControllers:(@[navLeft,navRight])];
+    self.window.rootViewController = vcSplit;
     
     //Inicializamos el modelo con el array de books
     NSLog(@"Number is %ld",(long)[self.library.books count]);
@@ -87,6 +97,7 @@
             //Creamos el libro
             CROBook *book=[[CROBook alloc]initWithTitle:[dictionary objectForKey:(@"title")]
                                            withImageURL:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
+                                           withPDFURL:([NSURL URLWithString:([dictionary objectForKey:@"pdf_url"])])
                                             withAuthors:[self getObjectFromKey:(@"authors") andDictionary:(dictionary)]
                                                withTags:[self getObjectFromKey:(@"tags") andDictionary:(dictionary)]];
             

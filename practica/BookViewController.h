@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CROBook.h"
+#import "CROLibraryTableViewController.h"
 
-@interface BookViewController : UIViewController
+@interface BookViewController : UIViewController<CROLibraryTableViewControllerDelegate>
 
 
 @property(nonatomic,strong) CROBook *book;
@@ -19,5 +20,7 @@
 @property(nonatomic,weak) IBOutlet UIImageView *bookImage;
 
 -(id)initWithBook:(CROBook*)aBook;
+
+- (IBAction)openPDF:(id)sender;
 
 @end

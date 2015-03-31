@@ -94,9 +94,13 @@ titleForFooterInSection:(NSInteger)section{
 #pragma mark -Table View Delegate
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{ 
-    BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self bookForIndexPath:(indexPath)])];
-    [self.navigationController pushViewController:vcBook animated:YES];
+{
+    NSLog(@"Selected ROW");
+    // Avisar al delegado
+    [self.delegate libraryTableViewController:(self) didSelectABook:([self bookForIndexPath:(indexPath)])];
+
+    //BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self bookForIndexPath:(indexPath)])];
+    //[self.navigationController pushViewController:vcBook animated:YES];
 }
 
 /*
