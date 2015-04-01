@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CROBookWebViewController : UIViewController
+@interface CROBookWebViewController : UIViewController<UIWebViewDelegate>
 
 @property(weak,nonatomic) IBOutlet UIWebView *browser;
-@property(strong,nonatomic) NSData *pdf;
+@property(strong,nonatomic) NSURL *urlPdf;
+@property(nonatomic,weak) IBOutlet UIActivityIndicatorView *activityView;
 
 -(id)initWitURL:(NSURL*)aURL;
 

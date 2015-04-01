@@ -19,7 +19,6 @@
 -(id)initWithBook:(CROBook*)aBook{
     if(self=[super init]){
         _book=aBook;
-        self.title=self.book.title;
     }
     return self;
 }
@@ -41,6 +40,7 @@
 }
 
 - (void)synchronizeViewAndModel{
+    self.title=self.book.title;
     self.titleValue.text=self.book.title;
     self.authorValue.text=[self.book.authors componentsJoinedByString:@","];
     self.tagValue.text=[self.book.tags componentsJoinedByString:@","];

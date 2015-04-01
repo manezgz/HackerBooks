@@ -78,9 +78,9 @@
 
 -(void) downloadImagesAndPdfsFromArrayOfBooks:(NSArray*)arrayOfBooks{
     NSFileManager *fm=[NSFileManager defaultManager];
-    NSURL *urlCacheDir=[[fm URLsForDirectory:NSCachesDirectory
-                                   inDomains:NSUserDomainMask]lastObject];
-    
+    //NSString *pathCacheDir=[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)] objetAtIndex:0];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     NSMutableArray *auxArray=[[NSMutableArray alloc]init];
     NSMutableDictionary *auxDictioanry=[[NSMutableDictionary alloc]init];
     
@@ -88,15 +88,17 @@
         if([obj isKindOfClass:[NSDictionary class]]){
             NSDictionary *dictionary=(NSDictionary*)obj;
             
-            NSString *imageName =
-            [[[dictionary objectForKey:@"image_url"]componentsSeparatedByString:@"/"]lastObject];
-            NSURL *urlImage =[[urlCacheDir copy]URLByAppendingPathComponent:imageName];
-            NSData *dataImage=[[NSData alloc ]initWithContentsOfURL:urlImage];
-            UIImage *image = [[UIImage alloc] initWithData: dataImage];
+            NSString *imageName =[[[dictionary objectForKey:@"image_url"]componentsSeparatedByString:@"/"]lastObject];
+            NSString *imagePath =[documentsDirectoryPath stringByAppendingString:imageName];
+            
+            
+            //Descargamos Imagen
+            [self downloadFileWithData:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
+                              withName:(imagePath)];
             
             //Creamos el libro
             CROBook *book=[[CROBook alloc]initWithTitle:[dictionary objectForKey:(@"title")]
-                                           withImageURL:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
+                                           withImageURL:([NSURL fileURLWithPath:(imagePath)])
                                            withPDFURL:([NSURL URLWithString:([dictionary objectForKey:@"pdf_url"])])
                                             withAuthors:[self getObjectFromKey:(@"authors") andDictionary:(dictionary)]
                                                withTags:[self getObjectFromKey:(@"tags") andDictionary:(dictionary)]];
@@ -110,6 +112,13 @@
     
     self.library= [[CROLibraryModel alloc]initWithArray:auxArray withDictionary:auxDictioanry];
     
+}
+
+-(void)downloadFileWithData:(NSURL*)urlData
+                   withName:(NSString*)name{
+    
+    NSData *data=[[NSData alloc ]initWithContentsOfURL:urlData];
+    [data writeToFile:(name) atomically:YES];
 }
 
 -(NSArray*) getObjectFromKey:(NSString*) key andDictionary:(NSDictionary*)dictionary{
