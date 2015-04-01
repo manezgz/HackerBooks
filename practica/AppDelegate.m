@@ -22,19 +22,12 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    //Desgargamos el JSON de la URL Proporcionada
-    NSData *data=[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://t.co/K9ziV0z3SJ"]];
-    if(data!=nil){
-        NSError *error;
-        NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:data
-                                                           options:kNilOptions
-                                                             error:&error];
-        
-        [self downloadImagesAndPdfsFromArrayOfBooks:jsonArray];
-    }
-    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.library)
+    //Obtenemos el array con Obj JSON parseados
+    self.model=[self createLibraryModelFromJSONArray:[self getJsonArray]];
+    
+    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.model)
                                                                                        withStyle:UITableViewStylePlain];
-    BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self.library.books objectAtIndex:0])];
+    BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self.model.books objectAtIndex:0])];
     //Asignamos delegados
     tableVC.delegate=vcBook;
     
@@ -48,7 +41,7 @@
     self.window.rootViewController = vcSplit;
     
     //Inicializamos el modelo con el array de books
-    NSLog(@"Number is %ld",(long)[self.library.books count]);
+    NSLog(@"Number is %ld",(long)[self.model.books count]);
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -75,10 +68,36 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+              
+-(NSArray*) getJsonArray{
+    NSArray *jsonArray=nil;
+    NSData *data=nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
+    NSString *jsonPath=[documentsDirectoryPath stringByAppendingString:@"json.json"];
+    //Comprobamos si ya tenemos descargado el JSON y sino lo descargamos
+    if(![[NSUserDefaults standardUserDefaults]boolForKey:JSON_DOWNLOADED]){
+        //Tenemos que descargar el json
+        [self downloadFileWithData:([NSURL URLWithString:@"https://t.co/K9ziV0z3SJ"])
+                          withName:(jsonPath)];
+        //Seteamos en NUsersDefault JsonDownloaded a true
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:JSON_DOWNLOADED];
+    }
+    
+    data=[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:(jsonPath)]];
+                                  
+    if(data!=nil){
+        NSError *error;
+        jsonArray=[NSJSONSerialization JSONObjectWithData:data
+                                                           options:kNilOptions
+                                                             error:&error];
+    }
+    return jsonArray;
+}
+              
 
--(void) downloadImagesAndPdfsFromArrayOfBooks:(NSArray*)arrayOfBooks{
-    NSFileManager *fm=[NSFileManager defaultManager];
-    //NSString *pathCacheDir=[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)] objetAtIndex:0];
+-(CROLibraryModel*) createLibraryModelFromJSONArray:(NSArray*)arrayOfBooks{
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     NSMutableArray *auxArray=[[NSMutableArray alloc]init];
@@ -92,9 +111,14 @@
             NSString *imagePath =[documentsDirectoryPath stringByAppendingString:imageName];
             
             
-            //Descargamos Imagen
-            [self downloadFileWithData:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
-                              withName:(imagePath)];
+            //Descargamos Imagen sino está descargada
+            if(![[NSUserDefaults standardUserDefaults]boolForKey:IMAGES_DOWNLOADED]){
+                //Tenemos que descargar la imagen
+                [self downloadFileWithData:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
+                                  withName:(imagePath)];
+
+                
+            }
             
             //Creamos el libro
             CROBook *book=[[CROBook alloc]initWithTitle:[dictionary objectForKey:(@"title")]
@@ -109,8 +133,10 @@
             
         }
     }
+    //Seteamos en NUsersDefault ImagesDownlaoded a true
+    [[NSUserDefaults standardUserDefaults]setBool:YES forKey:IMAGES_DOWNLOADED];
     
-    self.library= [[CROLibraryModel alloc]initWithArray:auxArray withDictionary:auxDictioanry];
+    return [[CROLibraryModel alloc]initWithArray:auxArray withDictionary:auxDictioanry];
     
 }
 
@@ -121,12 +147,16 @@
     [data writeToFile:(name) atomically:YES];
 }
 
--(NSArray*) getObjectFromKey:(NSString*) key andDictionary:(NSDictionary*)dictionary{
+-(NSArray*) getObjectFromKey:(NSString*) key
+               andDictionary:(NSDictionary*)dictionary{
+    
     NSString *value=[dictionary objectForKey:key];
     return [value componentsSeparatedByString:@","];
 }
 
--(void)addBook:(CROBook*)book toDictionary:(NSMutableDictionary*)dictionary{
+-(void)addBook:(CROBook*)book
+  toDictionary:(NSMutableDictionary*)dictionary{
+    
     for(NSString *tag in book.tags){
         NSString *tagNormalized=[tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if ([dictionary objectForKey:tagNormalized]==nil){
