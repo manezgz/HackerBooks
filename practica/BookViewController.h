@@ -10,7 +10,11 @@
 #import "CROBook.h"
 #import "CROLibraryTableViewController.h"
 
-@interface BookViewController : UIViewController<CROLibraryTableViewControllerDelegate>
+#define BOOK_FAVORITE_CHANGED @"bookFavoriteChanged"
+#define BOOK_KEY @"book"
+#define INDEX_PATH_KEY @"indexPath"
+
+@interface BookViewController : UIViewController<CROLibraryTableViewControllerDelegate,UISplitViewControllerDelegate>
 
 
 @property(nonatomic,strong) CROBook *book;
@@ -18,9 +22,12 @@
 @property(nonatomic,weak) IBOutlet UILabel *tagValue;
 @property(nonatomic,weak) IBOutlet UILabel *authorValue;
 @property(nonatomic,weak) IBOutlet UIImageView *bookImage;
+@property(nonatomic,weak) IBOutlet UISwitch *bookSwitch;
 
 -(id)initWithBook:(CROBook*)aBook;
 
 - (IBAction)openPDF:(id)sender;
+
+- (IBAction)favoriteSwitchChanged:(id)sender;
 
 @end

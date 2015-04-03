@@ -11,8 +11,9 @@
 
 @interface CROLibraryModel : NSObject
 
-@property(nonatomic,strong) NSArray *books;
+@property(nonatomic,strong) NSArray *arrayOfTagsSorted;
 @property(nonatomic,strong) NSDictionary *dictOfTags;
+@property(strong,nonatomic) CROBook *bookSelected;
 
 -(id) initWithArray:(NSArray*)anArray withDictionary:(NSDictionary*)dict;
 

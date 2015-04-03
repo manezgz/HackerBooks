@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CROBook.h"
+#import "CROLibraryTableViewController.h"
 
 @interface CROBookWebViewController : UIViewController<UIWebViewDelegate>
 
 @property(weak,nonatomic) IBOutlet UIWebView *browser;
-@property(strong,nonatomic) NSURL *urlPdf;
+@property(strong,nonatomic) CROBook *book;
 @property(nonatomic,weak) IBOutlet UIActivityIndicatorView *activityView;
 
--(id)initWitURL:(NSURL*)aURL;
+-(id)initWithBook:(CROBook*)aBook;
 
 @end

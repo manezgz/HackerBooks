@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CROLibraryTableViewController.h"
 #import "BookViewController.h"
+#import "CRODataHandler.h"
 
 @interface AppDelegate ()
 
@@ -23,11 +24,19 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     //Obtenemos el array con Obj JSON parseados
-    self.model=[self createLibraryModelFromJSONArray:[self getJsonArray]];
+    CRODataHandler *dataHandler=[[CRODataHandler alloc]init];
+    NSArray *arrayJSON=[dataHandler getJsonArray];
+    
+    //Bajamos imagenes si es necesario
+    [dataHandler downloadImagesFromJSONArray:arrayJSON];
+    
+    //Creamos el modelo
+    self.model=[dataHandler createModelFromJsonArray:(arrayJSON)];
+    self.model.bookSelected=[dataHandler getInitialBook:(self.model)];
     
     CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.model)
                                                                                        withStyle:UITableViewStylePlain];
-    BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self.model.books objectAtIndex:0])];
+    BookViewController *vcBook=[[BookViewController alloc]initWithBook:(self.model.bookSelected)];
     //Asignamos delegados
     tableVC.delegate=vcBook;
     
@@ -37,11 +46,9 @@
 
     
     UISplitViewController *vcSplit=[[UISplitViewController alloc]init];
+    vcSplit.delegate=vcBook;
     [vcSplit setViewControllers:(@[navLeft,navRight])];
     self.window.rootViewController = vcSplit;
-    
-    //Inicializamos el modelo con el array de books
-    NSLog(@"Number is %ld",(long)[self.model.books count]);
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -53,8 +60,17 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSDictionary *dict=self.model.dictOfTags;
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"bookDictionary"];
+    
+    CROBook *bookSelected=self.model.bookSelected;
+    NSData *dataBook = [NSKeyedArchiver archivedDataWithRootObject:bookSelected];
+    [[NSUserDefaults standardUserDefaults] setObject:dataBook forKey:@"bookSelected"];
+
+    
+    
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -66,109 +82,12 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-              
--(NSArray*) getJsonArray{
-    NSArray *jsonArray=nil;
-    NSData *data=nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-    NSString *jsonPath=[documentsDirectoryPath stringByAppendingString:@"json.json"];
-    //Comprobamos si ya tenemos descargado el JSON y sino lo descargamos
-    if(![[NSUserDefaults standardUserDefaults]boolForKey:JSON_DOWNLOADED]){
-        //Tenemos que descargar el json
-        [self downloadFileWithData:([NSURL URLWithString:@"https://t.co/K9ziV0z3SJ"])
-                          withName:(jsonPath)];
-        //Seteamos en NUsersDefault JsonDownloaded a true
-        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:JSON_DOWNLOADED];
-    }
+     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.model.dictOfTags];
+     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"bookDictionary"];
     
-    data=[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:(jsonPath)]];
-                                  
-    if(data!=nil){
-        NSError *error;
-        jsonArray=[NSJSONSerialization JSONObjectWithData:data
-                                                           options:kNilOptions
-                                                             error:&error];
-    }
-    return jsonArray;
-}
-              
-
--(CROLibraryModel*) createLibraryModelFromJSONArray:(NSArray*)arrayOfBooks{
-
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-    NSMutableArray *auxArray=[[NSMutableArray alloc]init];
-    NSMutableDictionary *auxDictioanry=[[NSMutableDictionary alloc]init];
-    
-    for (id obj in arrayOfBooks) {
-        if([obj isKindOfClass:[NSDictionary class]]){
-            NSDictionary *dictionary=(NSDictionary*)obj;
-            
-            NSString *imageName =[[[dictionary objectForKey:@"image_url"]componentsSeparatedByString:@"/"]lastObject];
-            NSString *imagePath =[documentsDirectoryPath stringByAppendingString:imageName];
-            
-            
-            //Descargamos Imagen sino está descargada
-            if(![[NSUserDefaults standardUserDefaults]boolForKey:IMAGES_DOWNLOADED]){
-                //Tenemos que descargar la imagen
-                [self downloadFileWithData:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
-                                  withName:(imagePath)];
-
-                
-            }
-            
-            //Creamos el libro
-            CROBook *book=[[CROBook alloc]initWithTitle:[dictionary objectForKey:(@"title")]
-                                           withImageURL:([NSURL fileURLWithPath:(imagePath)])
-                                           withPDFURL:([NSURL URLWithString:([dictionary objectForKey:@"pdf_url"])])
-                                            withAuthors:[self getObjectFromKey:(@"authors") andDictionary:(dictionary)]
-                                               withTags:[self getObjectFromKey:(@"tags") andDictionary:(dictionary)]];
-            
-            //Añadimos el libro al array
-            [auxArray addObject:book];
-            [self addBook:(book) toDictionary:(auxDictioanry)];
-            
-        }
-    }
-    //Seteamos en NUsersDefault ImagesDownlaoded a true
-    [[NSUserDefaults standardUserDefaults]setBool:YES forKey:IMAGES_DOWNLOADED];
-    
-    return [[CROLibraryModel alloc]initWithArray:auxArray withDictionary:auxDictioanry];
-    
-}
-
--(void)downloadFileWithData:(NSURL*)urlData
-                   withName:(NSString*)name{
-    
-    NSData *data=[[NSData alloc ]initWithContentsOfURL:urlData];
-    [data writeToFile:(name) atomically:YES];
-}
-
--(NSArray*) getObjectFromKey:(NSString*) key
-               andDictionary:(NSDictionary*)dictionary{
-    
-    NSString *value=[dictionary objectForKey:key];
-    return [value componentsSeparatedByString:@","];
-}
-
--(void)addBook:(CROBook*)book
-  toDictionary:(NSMutableDictionary*)dictionary{
-    
-    for(NSString *tag in book.tags){
-        NSString *tagNormalized=[tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([dictionary objectForKey:tagNormalized]==nil){
-            NSMutableArray *array=[[NSMutableArray alloc]init];
-            [array addObject:book];
-            [dictionary setObject:array forKey:tagNormalized];
-        }else{
-            NSMutableArray *array=[dictionary objectForKey:tagNormalized];
-            [array addObject:book];
-            [dictionary setObject:array forKey:tagNormalized];
-        }
-    }
+    CROBook *bookSelected=self.model.bookSelected;
+    NSData *dataBook = [NSKeyedArchiver archivedDataWithRootObject:bookSelected];
+    [[NSUserDefaults standardUserDefaults] setObject:dataBook forKey:@"bookSelected"];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CROBookWebViewController.h"
+#import "BookViewController.h"
 
 @interface CROBookWebViewController ()
 
@@ -14,10 +15,10 @@
 
 @implementation CROBookWebViewController
 
--(id)initWitURL:(NSURL*)aURL{
+-(id)initWithBook:(CROBook *)aBook{
     if(self=[super init]){
         //NSData *pdfData = [[NSData alloc] initWithContentsOfURL:aURL];
-        self.urlPdf=aURL;
+        self.book=aBook;
     }
     return self;
 }
@@ -32,6 +33,7 @@
     self.browser.delegate=self;
     [self.activityView setHidden:NO];
     [self.activityView startAnimating];
+
 }
 
 - (void)viewDidLoad {
@@ -41,7 +43,15 @@
 }
 
 -(void)loadPDF{
-    NSData *pdfData = [[NSData alloc] initWithContentsOfURL:(self.urlPdf)];
+    //Lo primero comprobamos si el pdf ya ha sido descargado
+    NSData *pdfData=[[NSData alloc ]initWithContentsOfURL:(self.book.pdfProxy)];
+    if(pdfData==nil){
+        //Sino lo descargo
+        NSData *data=[[NSData alloc ]initWithContentsOfURL:self.book.pdf];
+        [data writeToFile:(self.book.pdfProxy.path) atomically:YES];
+        pdfData=[[NSData alloc ]initWithContentsOfURL:self.book.pdfProxy];
+    }
+    
     [self.browser loadData:(pdfData)
              MIMEType:(@"application/pdf")
      textEncodingName:@"utf-8"

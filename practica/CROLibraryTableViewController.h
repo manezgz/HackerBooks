@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CROLibraryModel.h"
+#define BOOK_SELECTED_CHANGED @"bookSelectedChanged"
 
 @class CROLibraryTableViewController;
 
 @protocol CROLibraryTableViewControllerDelegate <NSObject>
 
 - (void)libraryTableViewController:(CROLibraryTableViewController *)tableVC
-                    didSelectABook:(CROBook *)aBook;
+                    didSelectABook:(CROBook *)aBook
+                       atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -26,6 +26,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self synchronizeViewAndModel];
+    if(self.splitViewController.displayMode== UISplitViewControllerDisplayModePrimaryHidden){
+        self.navigationItem.rightBarButtonItem = self.splitViewController.displayModeButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+
 }
 
 - (void)viewDidLoad {
@@ -44,24 +50,58 @@
     self.titleValue.text=self.book.title;
     self.authorValue.text=[self.book.authors componentsJoinedByString:@","];
     self.tagValue.text=[self.book.tags componentsJoinedByString:@","];
-    NSData *imageData=[[NSData alloc]initWithContentsOfURL:(self.book.image)];
+    NSData *imageData=[[NSData alloc]initWithContentsOfURL:([self.book imageProxy])];
     self.bookImage.image = [UIImage imageWithData:(imageData)];
+    [self.bookSwitch setOn:(self.book.isFavorite)];
     
 }
 
+
+#pragma mark - Actions
+
 - (IBAction)openPDF:(id)sender{
     NSLog(@"Toco boton");
-    CROBookWebViewController *vcPDF=[[CROBookWebViewController alloc]initWitURL:(self.book.pdf)];
+    CROBookWebViewController *vcPDF=[[CROBookWebViewController alloc]initWithBook:(self.book)];
     [self.navigationController pushViewController:vcPDF animated:YES];
+}
+
+- (IBAction)favoriteSwitchChanged:(id)sender{
+
+    if(self.book.isFavorite!=self.bookSwitch.isOn){
+        self.book.isFavorite=self.bookSwitch.isOn;
+        
+        //Creamos y enviamos la notificación.
+        NSNotification *notification=[NSNotification notificationWithName:(BOOK_FAVORITE_CHANGED)
+                                                                  object:(self)
+                                                                userInfo:(@{BOOK_KEY:self.book}
+                                                                         )];
+        [[NSNotificationCenter defaultCenter]postNotification:(notification)];
+    }
 }
 
 #pragma mark Delegate
 - (void)libraryTableViewController:(CROLibraryTableViewController *)tableVC
-                   didSelectABook:(CROBook *)aBook{
+                   didSelectABook:(CROBook *)aBook
+                       atIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"Delegado recibe peticion");
     self.book=aBook;
+    //self.indexPath=indexPath;
+    //Comprobamos que controlador tiene el navigationController
+    [self.navigationController popToRootViewControllerAnimated:TRUE];
     [self synchronizeViewAndModel];
 }
+
+-(void) splitViewController:(UISplitViewController *)svc
+    willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode{
+    
+    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+        self.navigationItem.rightBarButtonItem = svc.displayModeButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
+
 
 /*
  #pragma mark - Navigation

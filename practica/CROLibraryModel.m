@@ -13,14 +13,17 @@
 -(id) initWithArray:(NSArray*)anArray
      withDictionary:(NSDictionary*)dict{
     if(self=[super init]){
-        self.books=anArray;
+        self.arrayOfTagsSorted=anArray;
         self.dictOfTags=dict;
     }
     return self;
 }
 
+
+
+
 -(NSUInteger)	booksCount{
-    return [self.books count];
+    return 30;
 }
 
 -(NSArray*)	tags{

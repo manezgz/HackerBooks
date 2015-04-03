@@ -21,15 +21,41 @@
     if(self=[super initWithStyle:aStyle]){
         _model=aLibrary;
         self.title = @"Library";
-        _arrayOfTags=[self.model.dictOfTags allKeys];
+        _arrayOfTags=self.model.arrayOfTagsSorted;
+        
         self.tableView.delegate=self;
+        
+        //Le damos de alta como observer de la notificación de que se aha modificado un libro favorito
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(modelDidChange:)
+                                                     name:BOOK_FAVORITE_CHANGED
+                                                   object:nil];
     }
     return self;
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
+
+-(void)dealloc{
+    // Baja en notificaciones
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+   
 }
 
 
@@ -59,7 +85,7 @@
     }
     
     // Sincronizamos modelo con vista (celda)
-    NSData *imageData=[[NSData alloc]initWithContentsOfURL:(book.image)];
+    NSData *imageData=[[NSData alloc]initWithContentsOfURL:([book imageProxy])];
     cell.imageView.image = [UIImage imageWithData:(imageData)];
     cell.textLabel.text =book.title;
     cell.detailTextLabel.text=[book.authors componentsJoinedByString:@","];
@@ -81,7 +107,7 @@ titleForFooterInSection:(NSInteger)section{
 
 - (CROBook *)bookForIndexPath:(NSIndexPath *)indexPath
 {
-    // Averiguamos de qué vino se trata
+    // Averiguamos de qué book se trata
     CROBook *book = nil;
     
     NSString *section=[self.arrayOfTags objectAtIndex:indexPath.section];
@@ -97,11 +123,38 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Selected ROW");
     // Avisar al delegado
-    [self.delegate libraryTableViewController:(self) didSelectABook:([self bookForIndexPath:(indexPath)])];
+    CROBook *book=[self bookForIndexPath:(indexPath)];
+    [self.delegate libraryTableViewController:(self)
+                               didSelectABook:(book)
+                                  atIndexPath:indexPath];
+    
+    //actualizamos el puntero a libro seleccionado
+    self.model.bookSelected=book;
 
-    //BookViewController *vcBook=[[BookViewController alloc]initWithBook:([self bookForIndexPath:(indexPath)])];
-    //[self.navigationController pushViewController:vcBook animated:YES];
 }
+
+#pragma mark -Notifications
+- (void) modelDidChange:(NSNotification *)aNotification{
+    CROBook *book = [aNotification.userInfo objectForKey:BOOK_KEY];
+    //Aplicamos los cambios al array de Favoritos
+    if(book.isFavorite){
+        [[self.model.dictOfTags objectForKey:(@"Favorites")] addObject:book];
+    }else{
+        //Como debe hacer algo raro por ahi lo recorremos y buscamos por titulo
+        for(CROBook *bookInArray in [self.model.dictOfTags objectForKey:(@"Favorites")]){
+            if([bookInArray.title isEqualToString:(book.title)]){
+                bookInArray.isFavorite=NO;
+                [[self.model.dictOfTags objectForKey:(@"Favorites")] removeObject:bookInArray];
+                break;
+            }
+        }
+        
+    }
+    
+    [self.tableView reloadData];
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.

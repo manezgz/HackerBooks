@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CROLibraryModel.h"
 
-#define JSON_DOWNLOADED @"JSON_DOWNLOADED"
-#define IMAGES_DOWNLOADED @"IMAGES_DOWNLOADED"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

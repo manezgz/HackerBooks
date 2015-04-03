@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="authorValue" destination="t7i-7O-Lfz" id="mHb-iq-0jw"/>
                 <outlet property="bookImage" destination="Q0p-ON-dRv" id="4a4-zC-H22"/>
+                <outlet property="bookSwitch" destination="14A-8k-y7I" id="eZQ-xi-o8b"/>
                 <outlet property="tagValue" destination="NuM-Lo-dW7" id="9o3-a2-nfY"/>
                 <outlet property="titleValue" destination="zvv-qk-ajU" id="nK2-Ry-QtJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -64,6 +65,9 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="14A-8k-y7I">
                     <rect key="frame" x="322" y="294" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="favoriteSwitchChanged:" destination="-1" eventType="valueChanged" id="hha-OZ-JdA"/>
+                    </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AuthorsValue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="t7i-7O-Lfz">
                     <rect key="frame" x="322" y="110" width="446" height="42"/>

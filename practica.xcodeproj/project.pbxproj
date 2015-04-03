@@ -19,6 +19,7 @@
 		3A88C1AF1AC84F4700D9B548 /* CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1AE1AC84F4700D9B548 /* CROBook.m */; };
 		3A88C1B31AC84F9A00D9B548 /* CROLibraryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1B21AC84F9A00D9B548 /* CROLibraryModel.m */; };
 		3A88C1B61AC851F400D9B548 /* CROLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1B51AC851F400D9B548 /* CROLibraryTableViewController.m */; };
+		3AED15C41ACEC214000CBF4A /* CRODataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AED15C31ACEC214000CBF4A /* CRODataHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		3A88C1B21AC84F9A00D9B548 /* CROLibraryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROLibraryModel.m; sourceTree = "<group>"; };
 		3A88C1B41AC851F400D9B548 /* CROLibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROLibraryTableViewController.h; sourceTree = "<group>"; };
 		3A88C1B51AC851F400D9B548 /* CROLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROLibraryTableViewController.m; sourceTree = "<group>"; };
+		3AED15C21ACEC214000CBF4A /* CRODataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRODataHandler.h; sourceTree = "<group>"; };
+		3AED15C31ACEC214000CBF4A /* CRODataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRODataHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,7 @@
 		3A88C18C1AC84EBD00D9B548 /* practica */ = {
 			isa = PBXGroup;
 			children = (
+				3AED15C51ACEC21B000CBF4A /* Handlers */,
 				3A88C1B71AC851FB00D9B548 /* Controller */,
 				3A88C1B01AC84F4D00D9B548 /* Models */,
 				3A88C1911AC84EBD00D9B548 /* AppDelegate.h */,
@@ -156,6 +160,15 @@
 				3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		3AED15C51ACEC21B000CBF4A /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				3AED15C21ACEC214000CBF4A /* CRODataHandler.h */,
+				3AED15C31ACEC214000CBF4A /* CRODataHandler.m */,
+			);
+			name = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +279,7 @@
 				3A65BA9A1AC9FB5400FDB280 /* BookViewController.m in Sources */,
 				3A88C1B31AC84F9A00D9B548 /* CROLibraryModel.m in Sources */,
 				3A88C1AF1AC84F4700D9B548 /* CROBook.m in Sources */,
+				3AED15C41ACEC214000CBF4A /* CRODataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,8 +396,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = practica/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -392,8 +408,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = practica/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

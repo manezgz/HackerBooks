@@ -9,19 +9,28 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-@interface CROBook : NSObject
+@interface CROBook : NSObject<NSCoding>
 
-@property(nonatomic,strong) NSString *title;
+@property(nonatomic,copy) NSString *title;
 @property(nonatomic,strong) NSURL *image;
 @property(nonatomic,strong) NSURL *pdf;
 @property(nonatomic,strong) NSArray *authors;
+@property(nonatomic) BOOL isFavorite;
 @property(nonatomic,strong) NSArray *tags;
 
 -(id) initWithTitle:(NSString *)title
        withImageURL:(NSURL*)image
          withPDFURL:(NSURL*)image
         withAuthors:(NSArray*)authors
-           withTags:(NSArray*)tags;
+           withTags:(NSArray*)tags
+       withFavorite:(BOOL)isFavorite;
+
+-(NSURL*) imageProxy;
+
+-(NSURL*) pdfProxy;
+
+
+
 
 
 
