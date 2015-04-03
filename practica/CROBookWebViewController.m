@@ -19,6 +19,7 @@
     if(self=[super init]){
         //NSData *pdfData = [[NSData alloc] initWithContentsOfURL:aURL];
         self.book=aBook;
+
     }
     return self;
 }
@@ -40,6 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.browser.delegate=self;
+    self.edgesForExtendedLayout=UIRectEdgeNone;
 }
 
 -(void)loadPDF{

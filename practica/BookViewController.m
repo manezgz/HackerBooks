@@ -26,12 +26,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self synchronizeViewAndModel];
-    if(self.splitViewController.displayMode== UISplitViewControllerDisplayModePrimaryHidden){
-        self.navigationItem.rightBarButtonItem = self.splitViewController.displayModeButtonItem;
-    }else{
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-
+    self.navigationItem.rightBarButtonItem = self.splitViewController.displayModeButtonItem;
 }
 
 - (void)viewDidLoad {
@@ -91,15 +86,15 @@
     [self synchronizeViewAndModel];
 }
 
--(void) splitViewController:(UISplitViewController *)svc
-    willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode{
-    
-    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
-        self.navigationItem.rightBarButtonItem = svc.displayModeButtonItem;
-    }else{
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-}
+//-(void) splitViewController:(UISplitViewController *)svc
+//    willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode{
+//    
+//    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+//        self.navigationItem.rightBarButtonItem = svc.displayModeButtonItem;
+//    }else{
+//        self.navigationItem.rightBarButtonItem = nil;
+//    }
+//}
 
 
 
