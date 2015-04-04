@@ -20,7 +20,7 @@
 
 @end
 
-@interface CROLibraryTableViewController : UITableViewController
+@interface CROLibraryTableViewController : UITableViewController<CROLibraryTableViewControllerDelegate>
 
 @property(strong,nonatomic) CROLibraryModel *model;
 @property(strong,nonatomic) NSArray *arrayOfTags;

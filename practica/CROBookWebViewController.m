@@ -16,7 +16,8 @@
 @implementation CROBookWebViewController
 
 -(id)initWithBook:(CROBook *)aBook{
-    if(self=[super init]){
+    if(self=[super initWithNibName:nil
+                            bundle:nil]){
         //NSData *pdfData = [[NSData alloc] initWithContentsOfURL:aURL];
         self.book=aBook;
 

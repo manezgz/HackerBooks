@@ -34,21 +34,12 @@
     self.model=[dataHandler createModelFromJsonArray:(arrayJSON)];
     self.model.bookSelected=[dataHandler getInitialBook:(self.model)];
     
-    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(self.model)
-                                                                                       withStyle:UITableViewStylePlain];
-    BookViewController *vcBook=[[BookViewController alloc]initWithBook:(self.model.bookSelected)];
-    //Asignamos delegados
-    tableVC.delegate=vcBook;
-    
-    
-    UINavigationController *navLeft=[[UINavigationController alloc]initWithRootViewController:tableVC];
-    UINavigationController *navRight=[[UINavigationController alloc]initWithRootViewController:vcBook];
-
-    
-    UISplitViewController *vcSplit=[[UISplitViewController alloc]init];
-    vcSplit.delegate=vcBook;
-    [vcSplit setViewControllers:(@[navLeft,navRight])];
-    self.window.rootViewController = vcSplit;
+    //Configuramos la Universalidad de la Aplicacion
+    if([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad){
+        [self configureAppForIpadWithModel:(CROLibraryModel*)self.model];
+    }else{
+        [self configureAppForIphoneWithModel:(CROLibraryModel*)self.model];
+    }
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -67,10 +58,6 @@
     CROBook *bookSelected=self.model.bookSelected;
     NSData *dataBook = [NSKeyedArchiver archivedDataWithRootObject:bookSelected];
     [[NSUserDefaults standardUserDefaults] setObject:dataBook forKey:@"bookSelected"];
-
-    
-    
-    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -88,6 +75,40 @@
     CROBook *bookSelected=self.model.bookSelected;
     NSData *dataBook = [NSKeyedArchiver archivedDataWithRootObject:bookSelected];
     [[NSUserDefaults standardUserDefaults] setObject:dataBook forKey:@"bookSelected"];
+}
+
+-(void) configureAppForIpadWithModel:(CROLibraryModel*)model{
+    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(model)
+                                                                                       withStyle:UITableViewStylePlain];
+    BookViewController *vcBook=[[BookViewController alloc]initWithBook:(model.bookSelected)];
+    //Asignamos delegados
+    tableVC.delegate=vcBook;
+    
+    
+    UINavigationController *navLeft=[[UINavigationController alloc]initWithRootViewController:tableVC];
+    UINavigationController *navRight=[[UINavigationController alloc]initWithRootViewController:vcBook];
+    
+    
+    UISplitViewController *vcSplit=[[UISplitViewController alloc]init];
+    vcSplit.delegate=vcBook;
+    [vcSplit setViewControllers:(@[navLeft,navRight])];
+    self.window.rootViewController = vcSplit;
+}
+
+-(void) configureAppForIphoneWithModel:(CROLibraryModel*)model{
+    //Creamos el controlador
+    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(model)
+                                                                                       withStyle:UITableViewStylePlain];
+   
+    //Creaoms el combinador
+    UINavigationController *navVC=[[UINavigationController alloc]init];
+    [navVC pushViewController:tableVC animated:(YES)];
+    
+    //Asiganamos delegados
+    tableVC.delegate=tableVC;
+    
+    //Lo hacemos root
+    self.window.rootViewController = navVC;
 }
 
 @end

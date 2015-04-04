@@ -20,7 +20,7 @@
     
     if(self=[super initWithStyle:aStyle]){
         _model=aLibrary;
-        self.title = @"Library";
+        self.title = @"Hacker Books";
         _arrayOfTags=self.model.arrayOfTagsSorted;
         
         self.tableView.delegate=self;
@@ -131,6 +131,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     //actualizamos el puntero a libro seleccionado
     self.model.bookSelected=book;
 
+}
+
+- (void)libraryTableViewController:(CROLibraryTableViewController *)tableVC
+                    didSelectABook:(CROBook *)aBook
+                       atIndexPath:(NSIndexPath *)indexPath{
+    
+    //creamos un BookViewController y le casco un Push
+    BookViewController *bookVC=[[BookViewController alloc]initWithBook:aBook];
+    [self.navigationController pushViewController:bookVC animated:(YES)];
 }
 
 #pragma mark -Notifications
