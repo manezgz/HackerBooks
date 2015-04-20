@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CROLibraryModel.h"
 
+@class CROCoreDataStack;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong,nonatomic) CROLibraryModel *model;
-
+@property (strong, nonatomic) CROCoreDataStack *model;
 
 @end
 

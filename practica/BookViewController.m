@@ -2,13 +2,15 @@
 //  BookViewController.m
 //  practica
 //
-//  Created by Jose Manuel Franco on 30/3/15.
+//  Created by Jose Manuel Franco on 18/4/15.
 //  Copyright (c) 2015 Jose Manuel Franco. All rights reserved.
 //
 
 #import "BookViewController.h"
-#import "CROBookWebViewController.h"
-#import "CROLibraryTableViewController.h"
+#import "ReaderDocument.h"
+#import "PdfViewController.h"
+#import "CRONotesViewController.h"
+#import "CRONote.h"
 
 @interface BookViewController ()
 
@@ -16,23 +18,60 @@
 
 @implementation BookViewController
 
--(id)initWithBook:(CROBook*)aBook{
-    if(self=[super init]){
-        _book=aBook;
+UIActivityIndicatorView *activityIndicator;
+
+-(instancetype) initWithBook:(CROBook*) book
+                  andContext:(NSManagedObjectContext *)context{
+    if (self = [super initWithNibName:nil
+                               bundle:nil]) {
+        _book = book;
+        _context=context;
+        //Recuperamos el tag de favoritos
+        NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[CROTag entityName]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tagName == %@",@"Favoritos"];
+        [req setPredicate:predicate];
+        NSArray *resultFetch=[context executeFetchRequest:req error:nil];
+        _favoriteTag=[resultFetch firstObject];
+        
     }
+    
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self synchronizeViewAndModel];
-    self.navigationItem.rightBarButtonItem = self.splitViewController.displayModeButtonItem;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.edgesForExtendedLayout=UIRectEdgeNone;
+    
+    // Asegurarme de que la vista del controlador ocupa solo el espacio
+    // que deje un navigation o un tabBar
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"Navframe Height=%f",
+          self.navigationController.navigationBar.frame.size.height);
+    
+    //Create an instance of activity indicator view
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    //set the initial property
+    [activityIndicator stopAnimating];
+    [activityIndicator hidesWhenStopped];
+    activityIndicator.color = [UIColor blueColor];
+    //Create an instance of Bar button item with custome view which is of activity indicator
+    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+    //Set the bar button the navigation bar
+    [self navigationItem].rightBarButtonItem = barButton;
+    
+    // Sincronizamos modelo -> vistas
+    [self syncWithModel];
+    
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,72 +79,155 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)synchronizeViewAndModel{
-    self.title=self.book.title;
-    self.titleValue.text=self.book.title;
-    self.authorValue.text=[self.book.authors componentsJoinedByString:@","];
-    self.tagValue.text=[self.book.tags componentsJoinedByString:@","];
-    NSData *imageData=[[NSData alloc]initWithContentsOfURL:([self.book imageProxy])];
-    self.bookImage.image = [UIImage imageWithData:(imageData)];
-    [self.bookSwitch setOn:(self.book.isFavorite)];
+#pragma mark -  Notificaciones
+
+
+
+
+-(void) syncWithModel{
+    
+    self.title = self.book.title;
+    [UIView transitionWithView:self.bookImage
+                      duration:0.7
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.bookImage.image = [UIImage imageWithData:self.book.coverImage];
+                    } completion:nil];
+    
+    [self syncFavoriteButton];
+}
+
+-(void) syncFavoriteButton{
+    if (self.book.favoriteValue) {
+        self.favoriteButton.title = @"★";
+    }else{
+        self.favoriteButton.title = @"☆";
+    }
+}
+
+
+
+
+#pragma mark - AGTLibraryTableViewControllerDelegate
+//-(void) libraryTableViewController:(AGTLibraryTableViewController *)vc
+//                     didSelectBook:(AGTBook *)newBook{
+//    
+//    // cambiamos modelo y sincronizamos con el nuevo
+//    //self.model = newBook;
+//   // [self syncWithModel];
+//}
+
+- (IBAction)openPdf:(id)sender {
+    [activityIndicator startAnimating];
+    [self downloadAndRelocatePdf];
+    
     
 }
 
 
-#pragma mark - Actions
 
-- (IBAction)openPDF:(id)sender{
-    NSLog(@"Toco boton");
-    CROBookWebViewController *vcPDF=[[CROBookWebViewController alloc]initWithBook:(self.book)];
-    [self.navigationController pushViewController:vcPDF animated:YES];
+- (IBAction)viewNotes:(id)sender {
+    
+    // Fetch request
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[CRONote entityName]];
+    req.sortDescriptors = @[[NSSortDescriptor
+                             sortDescriptorWithKey:CRONoteAttributes.title
+                             ascending:YES],
+                            [NSSortDescriptor
+                             sortDescriptorWithKey:CRONoteAttributes.modificationDate
+                             ascending:NO]];
+    
+    req.predicate = [NSPredicate predicateWithFormat:@"book == %@", self.book];
+    
+    // Fetched Results Controller
+    NSFetchedResultsController *fc = [[NSFetchedResultsController alloc]
+                                      initWithFetchRequest:req
+                                      managedObjectContext:self.context
+                                      sectionNameKeyPath:nil
+                                      cacheName:nil];
+    
+    // layout
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumLineSpacing = 10;
+    layout.minimumInteritemSpacing = 10;
+    layout.itemSize = CGSizeMake(140, 150);
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    
+    // View controller
+    CRONotesViewController *nb = [CRONotesViewController coreDataCollectionViewControllerWithFetchedResultsController:fc
+                                                                                                               layout:layout];
+    nb.book = self.book;
+    
+    
+    // Push it!
+    [self.navigationController pushViewController:nb
+                                         animated:YES];
+    
 }
 
-- (IBAction)favoriteSwitchChanged:(id)sender{
 
-    if(self.book.isFavorite!=self.bookSwitch.isOn){
-        self.book.isFavorite=self.bookSwitch.isOn;
-        
-        //Creamos y enviamos la notificación.
-        NSNotification *notification=[NSNotification notificationWithName:(BOOK_FAVORITE_CHANGED)
-                                                                  object:(self)
-                                                                userInfo:(@{BOOK_KEY:self.book}
-                                                                         )];
-        [[NSNotificationCenter defaultCenter]postNotification:(notification)];
+
+-(void)downloadAndRelocatePdf{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *baseDocumentPath = [paths objectAtIndex:0];
+    NSString *fileName=@"/book.pdf";
+    NSString *filePath = [baseDocumentPath stringByAppendingPathComponent:fileName];
+    if(self.book.pdf.bookDownloaded){
+        [self.book.pdf.binData writeToFile:(filePath) atomically:YES];
+        [self loadPdf];
+    }else{
+        [self withURL:filePath block:^(NSData *pdfData) {
+            //Se lo asignamos al book
+            self.book.pdf.binData=pdfData;
+            self.book.pdf.bookDownloaded=YES;
+            [self loadPdf];
+        }];
     }
 }
 
-#pragma mark Delegate
-- (void)libraryTableViewController:(CROLibraryTableViewController *)tableVC
-                   didSelectABook:(CROBook *)aBook
-                       atIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Delegado recibe peticion");
-    self.book=aBook;
-    //self.indexPath=indexPath;
-    //Comprobamos que controlador tiene el navigationController
-    [self.navigationController popToRootViewControllerAnimated:TRUE];
-    [self synchronizeViewAndModel];
+-(void) loadPdf{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *baseDocumentPath = [paths objectAtIndex:0];
+    NSString *fileName=@"/book.pdf";
+    NSString *filePath = [baseDocumentPath stringByAppendingPathComponent:fileName];
+    ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:nil];
+    [activityIndicator stopAnimating];
+    if (document != nil){
+        PdfViewController *pdfVC = [[PdfViewController alloc] initWithReaderDocument:document];
+        //readerViewController.delegate = self;
+        //pdfVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        //pdfVC.modalPresentationStyle = UIModalPresentationNone;
+        [self.navigationController pushViewController:pdfVC
+                                             animated:YES];
+    }
+
 }
 
-//-(void) splitViewController:(UISplitViewController *)svc
-//    willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode{
-//    
-//    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
-//        self.navigationItem.rightBarButtonItem = svc.displayModeButtonItem;
-//    }else{
-//        self.navigationItem.rightBarButtonItem = nil;
-//    }
-//}
+-(void)withURL:(NSString*)filePath block:(void (^)(NSData* pdf))completionBlock{
+    
+    //Nos vamos a segundo plano a descargar la imagen
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        
+        NSData *data=[[NSData alloc ]initWithContentsOfURL:[NSURL URLWithString:self.book.pdf.url]];
+        [data writeToFile:(filePath) atomically:YES];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(data);
+        });
+    });
+}
 
 
+- (IBAction)flipFavorite:(id)sender {
+    self.book.favoriteValue = !self.book.favoriteValue;
+    [self syncFavoriteButton];
+    if(self.book.favoriteValue){
+        [self.book addTagsObject:self.favoriteTag];
+    }else{
+        [self.book removeTagsObject:self.favoriteTag];
+    }
+    
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+}
 @end

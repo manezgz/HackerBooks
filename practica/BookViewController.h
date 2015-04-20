@@ -2,32 +2,29 @@
 //  BookViewController.h
 //  practica
 //
-//  Created by Jose Manuel Franco on 30/3/15.
+//  Created by Jose Manuel Franco on 18/4/15.
 //  Copyright (c) 2015 Jose Manuel Franco. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "CROBook.h"
-#import "CROLibraryTableViewController.h"
+#import "CROTag.h"
+#import "CROPdf.h"
 
-#define BOOK_FAVORITE_CHANGED @"bookFavoriteChanged"
-#define BOOK_KEY @"book"
-#define INDEX_PATH_KEY @"indexPath"
-
-@interface BookViewController : UIViewController<CROLibraryTableViewControllerDelegate,UISplitViewControllerDelegate>
+@interface BookViewController : UIViewController
 
 
-@property(nonatomic,strong) CROBook *book;
-@property(nonatomic,weak) IBOutlet UILabel *titleValue;
-@property(nonatomic,weak) IBOutlet UILabel *tagValue;
-@property(nonatomic,weak) IBOutlet UILabel *authorValue;
-@property(nonatomic,weak) IBOutlet UIImageView *bookImage;
-@property(nonatomic,weak) IBOutlet UISwitch *bookSwitch;
 
--(id)initWithBook:(CROBook*)aBook;
+@property(strong,nonatomic) CROBook *book;
+@property(weak, nonatomic) IBOutlet UIImageView *bookImage;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;
+@property(strong,nonatomic) CROTag *favoriteTag;
+@property(strong,nonatomic) NSManagedObjectContext *context;
 
-- (IBAction)openPDF:(id)sender;
+-(instancetype) initWithBook:(CROBook*)book
+                  andContext:(NSManagedObjectContext *) context;
 
-- (IBAction)favoriteSwitchChanged:(id)sender;
+- (IBAction)openPdf:(id)sender;
+- (IBAction)flipFavorite:(id)sender;
 
 @end

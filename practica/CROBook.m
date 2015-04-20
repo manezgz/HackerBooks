@@ -1,71 +1,60 @@
-//
-//  CROBook.m
-//  Library
-//
-//  Created by Jose Manuel Franco on 27/3/15.
-//  Copyright (c) 2015 Jose Manuel Franco. All rights reserved.
-//
-
 #import "CROBook.h"
+@import UIKit;
+
+@interface CROBook ()
+
+// Private interface goes here.
+
+@end
 
 @implementation CROBook
 
--(id) initWithTitle:(NSString *)title
-       withImageURL:(NSURL*)image
-         withPDFURL:(NSURL*)pdf
-        withAuthors:(NSArray*)authors
-           withTags:(NSArray*)tags
-       withFavorite:(BOOL)isFavorite{
+@synthesize imageUpdated;
+
++(instancetype) bookWithTitle:(NSString *)title
+            withUrlCoverImage:(NSString*)url
+                      authors:(NSSet*)authors
+                      context:(NSManagedObjectContext *) context{
     
-    if(self=[super init]){
-        self.title=title;
-        self.image=image;
-        self.pdf=pdf;
-        self.authors=authors;
-        self.tags=tags;
-        self.isFavorite=isFavorite;
+    CROBook *book=[NSEntityDescription insertNewObjectForEntityForName:[CROBook entityName]
+                                                inManagedObjectContext:context];
+    
+    book.title=title;
+    book.authors=authors;
+    book.coverImageURL=url;
+    book.favoriteValue=NO;
+    
+    //Sacamos la imagen generica
+    NSData * imageData = UIImagePNGRepresentation([UIImage imageNamed:@"bookCoverGeneric"]);
+    book.coverImage=imageData;
+    book.imageUpdated=NO;
+    
+    return book;
+}
+
+-(void) updateImageBookInTable:(UITableView*)tableView{
+    if(!self.imageUpdated){
+        [self withImage:^(NSData *imageData) {
+            self.coverImage=imageData;
+            self.imageUpdated=YES;
+            [tableView reloadData];
+        }];
     }
-    return self;
 }
 
--(NSURL*) imageProxy{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-    NSString *imageName =[[[self.image absoluteString]componentsSeparatedByString:@"/"]lastObject];
-    NSString *imagePath =[documentsDirectoryPath stringByAppendingString:imageName];
-    return [NSURL fileURLWithPath:(imagePath)];
+-(void)withImage:(void (^)(NSData* image))completionBlock{
+    
+    //Nos vamos a segundo plano a descargar la imagen
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        
+        NSURL *imgURL =[NSURL URLWithString:self.coverImageURL];
+        
+        NSData *data=[NSData dataWithContentsOfURL:imgURL];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(data);
+        });
+    });
 }
-
--(NSURL*) pdfProxy{
-    NSString *pdfName=[[self.pdf.path componentsSeparatedByString:@"/"]lastObject];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-    NSString *pdfPath =[documentsDirectoryPath stringByAppendingString:pdfName];
-    return [NSURL fileURLWithPath:(pdfPath)];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-    if (self = [super init]) {
-        self.title = [decoder decodeObjectForKey:@"title"];
-        self.image = [decoder decodeObjectForKey:@"image"];
-        self.pdf = [decoder decodeObjectForKey:@"pdf"];
-        self.authors = [decoder decodeObjectForKey:@"authors"];
-        self.tags = [decoder decodeObjectForKey:@"tags"];
-        self.isFavorite = [decoder decodeBoolForKey:@"isFavorite"];
-
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:self.title forKey:@"title"];
-    [encoder encodeObject:self.image forKey:@"image"];
-    [encoder encodeObject:self.pdf forKey:@"pdf"];
-    [encoder encodeObject:self.authors forKey:@"authors"];
-    [encoder encodeObject:self.tags forKey:@"tags"];
-    [encoder encodeBool:self.isFavorite forKey:@"isFavorite"];
-}
-
-
 
 @end

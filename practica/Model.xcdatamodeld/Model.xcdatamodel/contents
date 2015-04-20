@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Author" representedClassName="CROAuthor" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="authors" inverseEntity="Book" syncable="YES"/>
+    </entity>
+    <entity name="Book" representedClassName="CROBook" syncable="YES">
+        <attribute name="coverImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="coverImageURL" attributeType="String" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Author" inverseName="books" inverseEntity="Author" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="books" inverseEntity="Note" syncable="YES"/>
+        <relationship name="pdf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pdf" inverseName="book" inverseEntity="Pdf" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="books" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName="CROLocation" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" attributeType="String" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="location" inverseEntity="Note" syncable="YES"/>
+    </entity>
+    <entity name="Note" representedClassName="CRONote" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="noteText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pageNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="notes" inverseEntity="Book" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="notes" inverseEntity="Location" syncable="YES"/>
+        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="notes" inverseEntity="Photo" syncable="YES"/>
+    </entity>
+    <entity name="Pdf" representedClassName="CROPdf" syncable="YES">
+        <attribute name="binData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="url" attributeType="String" syncable="YES"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="pdf" inverseEntity="Book" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName="CROPhoto" syncable="YES">
+        <attribute name="photo" attributeType="Binary" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="photo" inverseEntity="Note" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="CROTag" syncable="YES">
+        <attribute name="tagName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="tags" inverseEntity="Book" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Author" positionX="-524" positionY="-99" width="128" height="73"/>
+        <element name="Book" positionX="-684" positionY="72" width="128" height="163"/>
+        <element name="Location" positionX="-63" positionY="-45" width="128" height="103"/>
+        <element name="Note" positionX="-324" positionY="14" width="128" height="163"/>
+        <element name="Pdf" positionX="-315" positionY="227" width="128" height="88"/>
+        <element name="Photo" positionX="-72" positionY="117" width="128" height="73"/>
+        <element name="Tag" positionX="-506" positionY="351" width="128" height="73"/>
+    </elements>
+</model>

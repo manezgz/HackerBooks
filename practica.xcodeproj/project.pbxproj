@@ -7,20 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A5AC3571ACF51CE004779EF /* BookViewControlleripad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AC3561ACF51CE004779EF /* BookViewControlleripad.xib */; };
-		3A65BA9A1AC9FB5400FDB280 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A65BA981AC9FB5400FDB280 /* BookViewController.m */; };
-		3A65BA9B1AC9FB5400FDB280 /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A65BA991AC9FB5400FDB280 /* BookViewController.xib */; };
-		3A65BA9F1ACA0F5D00FDB280 /* CROBookWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A65BA9D1ACA0F5D00FDB280 /* CROBookWebViewController.m */; };
-		3A65BAA01ACA0F5D00FDB280 /* CROBookWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */; };
+		3A343A021AE06061008465EA /* CROCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A343A001AE06061008465EA /* CROCoreDataTableViewController.m */; };
+		3A343A051AE060E6008465EA /* CROBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A343A041AE060E6008465EA /* CROBooksViewController.m */; };
+		3A343A111AE1CA68008465EA /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A343A0F1AE1CA68008465EA /* BookViewController.m */; };
+		3A343A121AE1CA68008465EA /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A343A101AE1CA68008465EA /* BookViewController.xib */; };
+		3A343A151AE28E7D008465EA /* PdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A343A141AE28E7D008465EA /* PdfViewController.m */; };
+		3A343A1C1AE2AEEE008465EA /* Reader-Thumbs.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A343A1B1AE2AEEE008465EA /* Reader-Thumbs.png */; };
+		3A343A201AE2B4EF008465EA /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A343A1E1AE2B4EF008465EA /* NoteViewController.m */; };
+		3A343A211AE2B4EF008465EA /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A343A1F1AE2B4EF008465EA /* NoteViewController.xib */; };
 		3A88C1901AC84EBD00D9B548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C18F1AC84EBD00D9B548 /* main.m */; };
 		3A88C1931AC84EBD00D9B548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1921AC84EBD00D9B548 /* AppDelegate.m */; };
 		3A88C1951AC84EBD00D9B548 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A88C1941AC84EBD00D9B548 /* Images.xcassets */; };
 		3A88C1981AC84EBD00D9B548 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A88C1961AC84EBD00D9B548 /* LaunchScreen.xib */; };
 		3A88C1A41AC84EBD00D9B548 /* practicaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1A31AC84EBD00D9B548 /* practicaTests.m */; };
-		3A88C1AF1AC84F4700D9B548 /* CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1AE1AC84F4700D9B548 /* CROBook.m */; };
-		3A88C1B31AC84F9A00D9B548 /* CROLibraryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1B21AC84F9A00D9B548 /* CROLibraryModel.m */; };
-		3A88C1B61AC851F400D9B548 /* CROLibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1B51AC851F400D9B548 /* CROLibraryTableViewController.m */; };
-		3AED15C41ACEC214000CBF4A /* CRODataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AED15C31ACEC214000CBF4A /* CRODataHandler.m */; };
+		3AB4691A1ADDA24D005A95CA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469181ADDA24D005A95CA /* Model.xcdatamodeld */; };
+		3AB469371ADDB6CA005A95CA /* _CROAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4691C1ADDB6CA005A95CA /* _CROAuthor.m */; };
+		3AB469381ADDB6CA005A95CA /* _CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4691E1ADDB6CA005A95CA /* _CROBook.m */; };
+		3AB469391ADDB6CA005A95CA /* _CROLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469201ADDB6CA005A95CA /* _CROLocation.m */; };
+		3AB4693A1ADDB6CA005A95CA /* _CRONote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469221ADDB6CA005A95CA /* _CRONote.m */; };
+		3AB4693B1ADDB6CA005A95CA /* _CROPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469241ADDB6CA005A95CA /* _CROPdf.m */; };
+		3AB4693C1ADDB6CA005A95CA /* _CROPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469261ADDB6CA005A95CA /* _CROPhoto.m */; };
+		3AB4693D1ADDB6CA005A95CA /* _CROTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469281ADDB6CA005A95CA /* _CROTag.m */; };
+		3AB4693E1ADDB6CA005A95CA /* CROAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4692A1ADDB6CA005A95CA /* CROAuthor.m */; };
+		3AB4693F1ADDB6CA005A95CA /* CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4692C1ADDB6CA005A95CA /* CROBook.m */; };
+		3AB469401ADDB6CA005A95CA /* CROLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4692E1ADDB6CA005A95CA /* CROLocation.m */; };
+		3AB469411ADDB6CA005A95CA /* CRONote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469301ADDB6CA005A95CA /* CRONote.m */; };
+		3AB469421ADDB6CA005A95CA /* CROPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469321ADDB6CA005A95CA /* CROPdf.m */; };
+		3AB469431ADDB6CA005A95CA /* CROPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469341ADDB6CA005A95CA /* CROPhoto.m */; };
+		3AB469441ADDB6CA005A95CA /* CROTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469361ADDB6CA005A95CA /* CROTag.m */; };
+		3AB469481ADDBDAB005A95CA /* CROCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469471ADDBDAB005A95CA /* CROCoreDataStack.m */; };
+		3AB4694B1ADF1938005A95CA /* CRODataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4694A1ADF1938005A95CA /* CRODataHandler.m */; };
+		3AFB23A61AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFB23A51AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib */; };
+		3AFB23AA1AE571530095A5E3 /* CRONoteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23A91AE571530095A5E3 /* CRONoteCellView.m */; };
+		3AFB23AD1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23AC1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m */; };
+		3AFB23B01AE575520095A5E3 /* CRONotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23AF1AE575520095A5E3 /* CRONotesViewController.m */; };
+		3AFB23B21AE586610095A5E3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFB23B11AE586610095A5E3 /* MapKit.framework */; };
+		4843AC796115523016E2A354 /* libPods-practica.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BC569DEF8D1ECE3E144795 /* libPods-practica.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,13 +56,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A5AC3561ACF51CE004779EF /* BookViewControlleripad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewControlleripad.xib; sourceTree = "<group>"; };
-		3A65BA971AC9FB5400FDB280 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
-		3A65BA981AC9FB5400FDB280 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
-		3A65BA991AC9FB5400FDB280 /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
-		3A65BA9C1ACA0F5D00FDB280 /* CROBookWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBookWebViewController.h; sourceTree = "<group>"; };
-		3A65BA9D1ACA0F5D00FDB280 /* CROBookWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROBookWebViewController.m; sourceTree = "<group>"; };
-		3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CROBookWebViewController.xib; sourceTree = "<group>"; };
+		3A343A001AE06061008465EA /* CROCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROCoreDataTableViewController.m; sourceTree = "<group>"; };
+		3A343A011AE06061008465EA /* CROCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROCoreDataTableViewController.h; sourceTree = "<group>"; };
+		3A343A031AE060E6008465EA /* CROBooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBooksViewController.h; sourceTree = "<group>"; };
+		3A343A041AE060E6008465EA /* CROBooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROBooksViewController.m; sourceTree = "<group>"; };
+		3A343A0E1AE1CA68008465EA /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
+		3A343A0F1AE1CA68008465EA /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
+		3A343A101AE1CA68008465EA /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
+		3A343A131AE28E7D008465EA /* PdfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PdfViewController.h; sourceTree = "<group>"; };
+		3A343A141AE28E7D008465EA /* PdfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PdfViewController.m; sourceTree = "<group>"; };
+		3A343A1B1AE2AEEE008465EA /* Reader-Thumbs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs.png"; sourceTree = "<group>"; };
+		3A343A1D1AE2B4EF008465EA /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
+		3A343A1E1AE2B4EF008465EA /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
+		3A343A1F1AE2B4EF008465EA /* NoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
 		3A88C18A1AC84EBD00D9B548 /* practica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = practica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88C18E1AC84EBD00D9B548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88C18F1AC84EBD00D9B548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -51,14 +79,50 @@
 		3A88C19D1AC84EBD00D9B548 /* practicaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = practicaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A88C1A21AC84EBD00D9B548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88C1A31AC84EBD00D9B548 /* practicaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = practicaTests.m; sourceTree = "<group>"; };
-		3A88C1AD1AC84F4700D9B548 /* CROBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBook.h; sourceTree = "<group>"; };
-		3A88C1AE1AC84F4700D9B548 /* CROBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROBook.m; sourceTree = "<group>"; };
-		3A88C1B11AC84F9A00D9B548 /* CROLibraryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROLibraryModel.h; sourceTree = "<group>"; };
-		3A88C1B21AC84F9A00D9B548 /* CROLibraryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROLibraryModel.m; sourceTree = "<group>"; };
-		3A88C1B41AC851F400D9B548 /* CROLibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROLibraryTableViewController.h; sourceTree = "<group>"; };
-		3A88C1B51AC851F400D9B548 /* CROLibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROLibraryTableViewController.m; sourceTree = "<group>"; };
-		3AED15C21ACEC214000CBF4A /* CRODataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRODataHandler.h; sourceTree = "<group>"; };
-		3AED15C31ACEC214000CBF4A /* CRODataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRODataHandler.m; sourceTree = "<group>"; };
+		3AB469191ADDA24D005A95CA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		3AB4691B1ADDB6CA005A95CA /* _CROAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROAuthor.h; sourceTree = "<group>"; };
+		3AB4691C1ADDB6CA005A95CA /* _CROAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROAuthor.m; sourceTree = "<group>"; };
+		3AB4691D1ADDB6CA005A95CA /* _CROBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROBook.h; sourceTree = "<group>"; };
+		3AB4691E1ADDB6CA005A95CA /* _CROBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROBook.m; sourceTree = "<group>"; };
+		3AB4691F1ADDB6CA005A95CA /* _CROLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROLocation.h; sourceTree = "<group>"; };
+		3AB469201ADDB6CA005A95CA /* _CROLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROLocation.m; sourceTree = "<group>"; };
+		3AB469211ADDB6CA005A95CA /* _CRONote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CRONote.h; sourceTree = "<group>"; };
+		3AB469221ADDB6CA005A95CA /* _CRONote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CRONote.m; sourceTree = "<group>"; };
+		3AB469231ADDB6CA005A95CA /* _CROPdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROPdf.h; sourceTree = "<group>"; };
+		3AB469241ADDB6CA005A95CA /* _CROPdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROPdf.m; sourceTree = "<group>"; };
+		3AB469251ADDB6CA005A95CA /* _CROPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROPhoto.h; sourceTree = "<group>"; };
+		3AB469261ADDB6CA005A95CA /* _CROPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROPhoto.m; sourceTree = "<group>"; };
+		3AB469271ADDB6CA005A95CA /* _CROTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROTag.h; sourceTree = "<group>"; };
+		3AB469281ADDB6CA005A95CA /* _CROTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROTag.m; sourceTree = "<group>"; };
+		3AB469291ADDB6CA005A95CA /* CROAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROAuthor.h; sourceTree = "<group>"; };
+		3AB4692A1ADDB6CA005A95CA /* CROAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROAuthor.m; sourceTree = "<group>"; };
+		3AB4692B1ADDB6CA005A95CA /* CROBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBook.h; sourceTree = "<group>"; };
+		3AB4692C1ADDB6CA005A95CA /* CROBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROBook.m; sourceTree = "<group>"; };
+		3AB4692D1ADDB6CA005A95CA /* CROLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROLocation.h; sourceTree = "<group>"; };
+		3AB4692E1ADDB6CA005A95CA /* CROLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROLocation.m; sourceTree = "<group>"; };
+		3AB4692F1ADDB6CA005A95CA /* CRONote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRONote.h; sourceTree = "<group>"; };
+		3AB469301ADDB6CA005A95CA /* CRONote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRONote.m; sourceTree = "<group>"; };
+		3AB469311ADDB6CA005A95CA /* CROPdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROPdf.h; sourceTree = "<group>"; };
+		3AB469321ADDB6CA005A95CA /* CROPdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROPdf.m; sourceTree = "<group>"; };
+		3AB469331ADDB6CA005A95CA /* CROPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROPhoto.h; sourceTree = "<group>"; };
+		3AB469341ADDB6CA005A95CA /* CROPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROPhoto.m; sourceTree = "<group>"; };
+		3AB469351ADDB6CA005A95CA /* CROTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROTag.h; sourceTree = "<group>"; };
+		3AB469361ADDB6CA005A95CA /* CROTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROTag.m; sourceTree = "<group>"; };
+		3AB469461ADDBDAB005A95CA /* CROCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROCoreDataStack.h; sourceTree = "<group>"; };
+		3AB469471ADDBDAB005A95CA /* CROCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROCoreDataStack.m; sourceTree = "<group>"; };
+		3AB469491ADF1938005A95CA /* CRODataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRODataHandler.h; sourceTree = "<group>"; };
+		3AB4694A1ADF1938005A95CA /* CRODataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRODataHandler.m; sourceTree = "<group>"; };
+		3AFB23A51AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRONoteCollectionViewCell.xib; sourceTree = "<group>"; };
+		3AFB23A81AE571530095A5E3 /* CRONoteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRONoteCellView.h; sourceTree = "<group>"; };
+		3AFB23A91AE571530095A5E3 /* CRONoteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRONoteCellView.m; sourceTree = "<group>"; };
+		3AFB23AB1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROCoreDataCollectionViewController.h; sourceTree = "<group>"; };
+		3AFB23AC1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROCoreDataCollectionViewController.m; sourceTree = "<group>"; };
+		3AFB23AE1AE575520095A5E3 /* CRONotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRONotesViewController.h; sourceTree = "<group>"; };
+		3AFB23AF1AE575520095A5E3 /* CRONotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRONotesViewController.m; sourceTree = "<group>"; };
+		3AFB23B11AE586610095A5E3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		66BC569DEF8D1ECE3E144795 /* libPods-practica.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-practica.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE6DEC70EF23F3F5FDD8BCEF /* Pods-practica.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-practica.release.xcconfig"; path = "Pods/Target Support Files/Pods-practica/Pods-practica.release.xcconfig"; sourceTree = "<group>"; };
+		DF81E3BB85F01D6B71DB2B6E /* Pods-practica.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-practica.debug.xcconfig"; path = "Pods/Target Support Files/Pods-practica/Pods-practica.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AFB23B21AE586610095A5E3 /* MapKit.framework in Frameworks */,
+				4843AC796115523016E2A354 /* libPods-practica.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,12 +145,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A3439FF1AE05F63008465EA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3AFB23AE1AE575520095A5E3 /* CRONotesViewController.h */,
+				3AFB23AF1AE575520095A5E3 /* CRONotesViewController.m */,
+				3AFB23AB1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.h */,
+				3AFB23AC1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m */,
+				3A343A001AE06061008465EA /* CROCoreDataTableViewController.m */,
+				3A343A011AE06061008465EA /* CROCoreDataTableViewController.h */,
+				3A343A031AE060E6008465EA /* CROBooksViewController.h */,
+				3A343A041AE060E6008465EA /* CROBooksViewController.m */,
+				3A343A0E1AE1CA68008465EA /* BookViewController.h */,
+				3A343A1D1AE2B4EF008465EA /* NoteViewController.h */,
+				3A343A1E1AE2B4EF008465EA /* NoteViewController.m */,
+				3A343A1F1AE2B4EF008465EA /* NoteViewController.xib */,
+				3A343A0F1AE1CA68008465EA /* BookViewController.m */,
+				3A343A101AE1CA68008465EA /* BookViewController.xib */,
+				3A343A131AE28E7D008465EA /* PdfViewController.h */,
+				3A343A141AE28E7D008465EA /* PdfViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3A343A081AE18B17008465EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A343A1B1AE2AEEE008465EA /* Reader-Thumbs.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		3A88C1811AC84EBD00D9B548 = {
 			isa = PBXGroup;
 			children = (
 				3A88C18C1AC84EBD00D9B548 /* practica */,
 				3A88C1A01AC84EBD00D9B548 /* practicaTests */,
 				3A88C18B1AC84EBD00D9B548 /* Products */,
+				FF82D1FED19BA837FC50A3BE /* Pods */,
+				EDF71A42A754E7503F636F19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,14 +199,17 @@
 		3A88C18C1AC84EBD00D9B548 /* practica */ = {
 			isa = PBXGroup;
 			children = (
-				3AED15C51ACEC21B000CBF4A /* Handlers */,
-				3A88C1B71AC851FB00D9B548 /* Controller */,
-				3A88C1B01AC84F4D00D9B548 /* Models */,
+				3AFB23A71AE56FDD0095A5E3 /* Views */,
+				3A343A081AE18B17008465EA /* Resources */,
+				3A3439FF1AE05F63008465EA /* Controllers */,
+				3AB469451ADDB6DB005A95CA /* CoreDataModels */,
 				3A88C1911AC84EBD00D9B548 /* AppDelegate.h */,
 				3A88C1921AC84EBD00D9B548 /* AppDelegate.m */,
 				3A88C1941AC84EBD00D9B548 /* Images.xcassets */,
 				3A88C1961AC84EBD00D9B548 /* LaunchScreen.xib */,
 				3A88C18D1AC84EBD00D9B548 /* Supporting Files */,
+				3AB469491ADF1938005A95CA /* CRODataHandler.h */,
+				3AB4694A1ADF1938005A95CA /* CRODataHandler.m */,
 			);
 			path = practica;
 			sourceTree = "<group>";
@@ -138,40 +240,70 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3A88C1B01AC84F4D00D9B548 /* Models */ = {
+		3AB469451ADDB6DB005A95CA /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
-				3A88C1B11AC84F9A00D9B548 /* CROLibraryModel.h */,
-				3A88C1B21AC84F9A00D9B548 /* CROLibraryModel.m */,
-				3A88C1AD1AC84F4700D9B548 /* CROBook.h */,
-				3A88C1AE1AC84F4700D9B548 /* CROBook.m */,
+				3AB469181ADDA24D005A95CA /* Model.xcdatamodeld */,
+				3AB4691B1ADDB6CA005A95CA /* _CROAuthor.h */,
+				3AB4691C1ADDB6CA005A95CA /* _CROAuthor.m */,
+				3AB4691D1ADDB6CA005A95CA /* _CROBook.h */,
+				3AB4691E1ADDB6CA005A95CA /* _CROBook.m */,
+				3AB4691F1ADDB6CA005A95CA /* _CROLocation.h */,
+				3AB469201ADDB6CA005A95CA /* _CROLocation.m */,
+				3AB469211ADDB6CA005A95CA /* _CRONote.h */,
+				3AB469221ADDB6CA005A95CA /* _CRONote.m */,
+				3AB469231ADDB6CA005A95CA /* _CROPdf.h */,
+				3AB469241ADDB6CA005A95CA /* _CROPdf.m */,
+				3AB469251ADDB6CA005A95CA /* _CROPhoto.h */,
+				3AB469261ADDB6CA005A95CA /* _CROPhoto.m */,
+				3AB469271ADDB6CA005A95CA /* _CROTag.h */,
+				3AB469281ADDB6CA005A95CA /* _CROTag.m */,
+				3AB469291ADDB6CA005A95CA /* CROAuthor.h */,
+				3AB4692A1ADDB6CA005A95CA /* CROAuthor.m */,
+				3AB4692B1ADDB6CA005A95CA /* CROBook.h */,
+				3AB4692C1ADDB6CA005A95CA /* CROBook.m */,
+				3AB4692D1ADDB6CA005A95CA /* CROLocation.h */,
+				3AB4692E1ADDB6CA005A95CA /* CROLocation.m */,
+				3AB4692F1ADDB6CA005A95CA /* CRONote.h */,
+				3AB469301ADDB6CA005A95CA /* CRONote.m */,
+				3AB469311ADDB6CA005A95CA /* CROPdf.h */,
+				3AB469321ADDB6CA005A95CA /* CROPdf.m */,
+				3AB469331ADDB6CA005A95CA /* CROPhoto.h */,
+				3AB469341ADDB6CA005A95CA /* CROPhoto.m */,
+				3AB469351ADDB6CA005A95CA /* CROTag.h */,
+				3AB469361ADDB6CA005A95CA /* CROTag.m */,
+				3AB469461ADDBDAB005A95CA /* CROCoreDataStack.h */,
+				3AB469471ADDBDAB005A95CA /* CROCoreDataStack.m */,
 			);
-			name = Models;
+			name = CoreDataModels;
 			sourceTree = "<group>";
 		};
-		3A88C1B71AC851FB00D9B548 /* Controller */ = {
+		3AFB23A71AE56FDD0095A5E3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3A88C1B41AC851F400D9B548 /* CROLibraryTableViewController.h */,
-				3A88C1B51AC851F400D9B548 /* CROLibraryTableViewController.m */,
-				3A65BA971AC9FB5400FDB280 /* BookViewController.h */,
-				3A65BA981AC9FB5400FDB280 /* BookViewController.m */,
-				3A65BA991AC9FB5400FDB280 /* BookViewController.xib */,
-				3A5AC3561ACF51CE004779EF /* BookViewControlleripad.xib */,
-				3A65BA9C1ACA0F5D00FDB280 /* CROBookWebViewController.h */,
-				3A65BA9D1ACA0F5D00FDB280 /* CROBookWebViewController.m */,
-				3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */,
+				3AFB23A51AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib */,
+				3AFB23A81AE571530095A5E3 /* CRONoteCellView.h */,
+				3AFB23A91AE571530095A5E3 /* CRONoteCellView.m */,
 			);
-			name = Controller;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		3AED15C51ACEC21B000CBF4A /* Handlers */ = {
+		EDF71A42A754E7503F636F19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AED15C21ACEC214000CBF4A /* CRODataHandler.h */,
-				3AED15C31ACEC214000CBF4A /* CRODataHandler.m */,
+				3AFB23B11AE586610095A5E3 /* MapKit.framework */,
+				66BC569DEF8D1ECE3E144795 /* libPods-practica.a */,
 			);
-			name = Handlers;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF82D1FED19BA837FC50A3BE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF81E3BB85F01D6B71DB2B6E /* Pods-practica.debug.xcconfig */,
+				DE6DEC70EF23F3F5FDD8BCEF /* Pods-practica.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,9 +313,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A88C1A71AC84EBD00D9B548 /* Build configuration list for PBXNativeTarget "practica" */;
 			buildPhases = (
+				2C3C6A217EB66E4EA5B48BC5 /* Check Pods Manifest.lock */,
 				3A88C1861AC84EBD00D9B548 /* Sources */,
 				3A88C1871AC84EBD00D9B548 /* Frameworks */,
 				3A88C1881AC84EBD00D9B548 /* Resources */,
+				55EE5D27E4B76E74EF2F1C94 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,6 +357,11 @@
 				TargetAttributes = {
 					3A88C1891AC84EBD00D9B548 = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					3A88C19C1AC84EBD00D9B548 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -254,11 +393,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A343A1C1AE2AEEE008465EA /* Reader-Thumbs.png in Resources */,
+				3AFB23A61AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib in Resources */,
+				3A343A121AE1CA68008465EA /* BookViewController.xib in Resources */,
 				3A88C1981AC84EBD00D9B548 /* LaunchScreen.xib in Resources */,
-				3A65BAA01ACA0F5D00FDB280 /* CROBookWebViewController.xib in Resources */,
+				3A343A211AE2B4EF008465EA /* NoteViewController.xib in Resources */,
 				3A88C1951AC84EBD00D9B548 /* Images.xcassets in Resources */,
-				3A5AC3571ACF51CE004779EF /* BookViewControlleripad.xib in Resources */,
-				3A65BA9B1AC9FB5400FDB280 /* BookViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,19 +411,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2C3C6A217EB66E4EA5B48BC5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		55EE5D27E4B76E74EF2F1C94 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-practica/Pods-practica-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A88C1861AC84EBD00D9B548 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A88C1B61AC851F400D9B548 /* CROLibraryTableViewController.m in Sources */,
+				3AB4693E1ADDB6CA005A95CA /* CROAuthor.m in Sources */,
+				3AB4693A1ADDB6CA005A95CA /* _CRONote.m in Sources */,
+				3AB469401ADDB6CA005A95CA /* CROLocation.m in Sources */,
+				3AB4693B1ADDB6CA005A95CA /* _CROPdf.m in Sources */,
+				3A343A201AE2B4EF008465EA /* NoteViewController.m in Sources */,
+				3AB4693F1ADDB6CA005A95CA /* CROBook.m in Sources */,
+				3A343A111AE1CA68008465EA /* BookViewController.m in Sources */,
+				3AB4693C1ADDB6CA005A95CA /* _CROPhoto.m in Sources */,
+				3AB469391ADDB6CA005A95CA /* _CROLocation.m in Sources */,
+				3AFB23B01AE575520095A5E3 /* CRONotesViewController.m in Sources */,
 				3A88C1931AC84EBD00D9B548 /* AppDelegate.m in Sources */,
-				3A65BA9F1ACA0F5D00FDB280 /* CROBookWebViewController.m in Sources */,
 				3A88C1901AC84EBD00D9B548 /* main.m in Sources */,
-				3A65BA9A1AC9FB5400FDB280 /* BookViewController.m in Sources */,
-				3A88C1B31AC84F9A00D9B548 /* CROLibraryModel.m in Sources */,
-				3A88C1AF1AC84F4700D9B548 /* CROBook.m in Sources */,
-				3AED15C41ACEC214000CBF4A /* CRODataHandler.m in Sources */,
+				3AFB23AA1AE571530095A5E3 /* CRONoteCellView.m in Sources */,
+				3AFB23AD1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m in Sources */,
+				3AB469441ADDB6CA005A95CA /* CROTag.m in Sources */,
+				3AB469421ADDB6CA005A95CA /* CROPdf.m in Sources */,
+				3AB4693D1ADDB6CA005A95CA /* _CROTag.m in Sources */,
+				3AB469381ADDB6CA005A95CA /* _CROBook.m in Sources */,
+				3AB469411ADDB6CA005A95CA /* CRONote.m in Sources */,
+				3A343A021AE06061008465EA /* CROCoreDataTableViewController.m in Sources */,
+				3AB469481ADDBDAB005A95CA /* CROCoreDataStack.m in Sources */,
+				3AB469371ADDB6CA005A95CA /* _CROAuthor.m in Sources */,
+				3A343A151AE28E7D008465EA /* PdfViewController.m in Sources */,
+				3AB4694B1ADF1938005A95CA /* CRODataHandler.m in Sources */,
+				3AB4691A1ADDA24D005A95CA /* Model.xcdatamodeld in Sources */,
+				3AB469431ADDB6CA005A95CA /* CROPhoto.m in Sources */,
+				3A343A051AE060E6008465EA /* CROBooksViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +589,7 @@
 		};
 		3A88C1A81AC84EBD00D9B548 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF81E3BB85F01D6B71DB2B6E /* Pods-practica.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = practica/Info.plist;
@@ -409,6 +602,7 @@
 		};
 		3A88C1A91AC84EBD00D9B548 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE6DEC70EF23F3F5FDD8BCEF /* Pods-practica.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = practica/Info.plist;
@@ -484,6 +678,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3AB469181ADDA24D005A95CA /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3AB469191ADDA24D005A95CA /* Model.xcdatamodel */,
+			);
+			currentVersion = 3AB469191ADDA24D005A95CA /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3A88C1821AC84EBD00D9B548 /* Project object */;
 }

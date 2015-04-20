@@ -2,56 +2,20 @@
 //  CRODataHandler.m
 //  practica
 //
-//  Created by Jose Manuel Franco on 3/4/15.
+//  Created by Jose Manuel Franco on 16/4/15.
 //  Copyright (c) 2015 Jose Manuel Franco. All rights reserved.
 //
 
 #import "CRODataHandler.h"
+#import "CROBook.h"
+#import "CROAuthor.h"
+#import "CROTag.h"
+#import "CROPdf.h"
 
 @implementation CRODataHandler
 
-#pragma mark -Class Internal
--(void)downloadFileWithData:(NSURL*)urlData
-                   withName:(NSString*)name{
-    
-    NSData *data=[[NSData alloc ]initWithContentsOfURL:urlData];
-    [data writeToFile:(name) atomically:YES];
-}
 
--(void)addBook:(CROBook*)book
-  toDictionary:(NSMutableDictionary*)dictionary{
-    
-    for(NSString *tag in book.tags){
-        NSString *tagNormalized=[tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([dictionary objectForKey:tagNormalized]==nil){
-            NSMutableArray *array=[[NSMutableArray alloc]init];
-            [array addObject:book];
-            [dictionary setObject:array forKey:tagNormalized];
-        }else{
-            NSMutableArray *array=[dictionary objectForKey:tagNormalized];
-            [array addObject:book];
-            [dictionary setObject:array forKey:tagNormalized];
-        }
-    }
-}
 
--(NSArray*) getObjectFromKey:(NSString*) key
-               andDictionary:(NSDictionary*)dictionary{
-    
-    NSString *value=[dictionary objectForKey:key];
-    return [value componentsSeparatedByString:@","];
-}
-
-NSInteger mySort( NSString *section1, NSString *section2, void *context){
-    
-    if ([section1 isEqualToString:(@"Favorites")]){
-        return NSOrderedAscending;
-    }else if ([section2 isEqualToString:@"Favorites"]){
-        return NSOrderedDescending;
-    }else{
-        return [section1 compare:section2];
-    }
-}
 
 #pragma mark -Interface Implementation
 
@@ -61,15 +25,10 @@ NSInteger mySort( NSString *section1, NSString *section2, void *context){
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     NSString *jsonPath=[documentsDirectoryPath stringByAppendingString:@"json.json"];
-    //Comprobamos si ya tenemos descargado el JSON y sino lo descargamos
-    if(![[NSUserDefaults standardUserDefaults]boolForKey:JSON_DOWNLOADED]){
-        //Tenemos que descargar el json
-        [self downloadFileWithData:([NSURL URLWithString:@"https://t.co/K9ziV0z3SJ"])
+    //Descargamos JSON
+    [self downloadFileWithData:([NSURL URLWithString:@"https://t.co/K9ziV0z3SJ"])
                           withName:(jsonPath)];
-        //Seteamos en NUsersDefault JsonDownloaded a true
-        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:JSON_DOWNLOADED];
-    }
-    
+            
     data=[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:(jsonPath)]];
     if(data!=nil){
         NSError *error;
@@ -78,94 +37,81 @@ NSInteger mySort( NSString *section1, NSString *section2, void *context){
                                                     error:&error];
     }
     return jsonArray;
-
-}
-
--(void) downloadImagesFromJSONArray:(NSArray*)arrayOfBooks{
-    //Descargamos Imagenes sino están descargada
-    if(![[NSUserDefaults standardUserDefaults]boolForKey:IMAGES_DOWNLOADED]){
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-        for (id obj in arrayOfBooks) {
-            if([obj isKindOfClass:[NSDictionary class]]){
-                NSDictionary *dictionary=(NSDictionary*)obj;
-                
-                NSString *imageName =[[[dictionary objectForKey:@"image_url"]componentsSeparatedByString:@"/"]lastObject];
-                NSString *imagePath =[documentsDirectoryPath stringByAppendingString:imageName];
-                //Tenemos que descargar la imagen
-                [self downloadFileWithData:([NSURL URLWithString:([dictionary objectForKey:@"image_url"])])
-                                  withName:(imagePath)];
-                
-            }
-        }
-        //Seteamos en NUsersDefault ImagesDownlaoded a true
-        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:IMAGES_DOWNLOADED];
-    }
-}
-
--(CROLibraryModel*) createModelFromJsonArray:(NSArray*)arrayOfBooks{
-    NSMutableDictionary *auxDictionary=nil;
     
-    if([[NSUserDefaults standardUserDefaults]objectForKey:(@"bookDictionary")]!=nil){
-        auxDictionary=[NSKeyedUnarchiver unarchiveObjectWithData:([[NSUserDefaults standardUserDefaults]objectForKey:(@"bookDictionary")])];
+}
+
+
+-(void) addJsonArray:(NSArray*)arrayJSON
+   toCoreDataContext:(NSManagedObjectContext *)context{
+    
+    //Creamos el tag de favoritos
+    [CROTag tagWithName:@"Favoritos"
+                context:context];
+    
+    for (NSDictionary *dict in arrayJSON) {
         
-        //Nos falta que actualicemos la ruta de las imagenes a las ruta del simulador actual ya que esta va cambiando
+        
+        //Book
+        CROBook *book=[CROBook bookWithTitle:([dict objectForKey:@"title"])
+                           withUrlCoverImage:([dict objectForKey:@"image_url"])
+                                     authors:(nil)
                        
-    }else{
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectoryPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-        auxDictionary=[[NSMutableDictionary alloc]init];
-        //Añadimos la categoria de favoritos al diccionario
-        NSMutableArray *arrayFavorites=[[NSMutableArray alloc]init];
-        [auxDictionary setObject:arrayFavorites forKey:@"Favorites"];
+                                     context:context];
         
-        for (id obj in arrayOfBooks) {
-            if([obj isKindOfClass:[NSDictionary class]]){
-                NSDictionary *dictionary=(NSDictionary*)obj;
-                
-                NSString *imageName =[[[dictionary objectForKey:@"image_url"]componentsSeparatedByString:@"/"]lastObject];
-                NSString *imagePath =[documentsDirectoryPath stringByAppendingString:imageName];
-                
-                //Creamos el libro
-                CROBook *book=[[CROBook alloc]initWithTitle:[dictionary objectForKey:(@"title")]
-                                               withImageURL:([NSURL fileURLWithPath:(imagePath)])
-                                                 withPDFURL:([NSURL URLWithString:([dictionary objectForKey:@"pdf_url"])])
-                                                withAuthors:[self getObjectFromKey:(@"authors") andDictionary:(dictionary)]
-                                                   withTags:[self getObjectFromKey:(@"tags") andDictionary:(dictionary)]
-                                               withFavorite:(NO)];
-                
-                //Añadimos el libro al diccionario
-                [self addBook:(book) toDictionary:(auxDictionary)];
-                
-            }
+        //Authors
+        NSArray *authors =[self getObjectFromKey:(@"authors")
+                                   andDictionary:(dict)];
+        
+        for(NSString *obj in authors){
+            //Hacemos un trim a obj
+            NSString *trimmedAuthor = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            CROAuthor *author=[CROAuthor authorWithName:trimmedAuthor
+                                                context:context];
+            [book addAuthorsObject:author];
         }
+        
+        //Pdf
+        CROPdf *pdf=[CROPdf pdfWithUrl:[dict objectForKey:@"pdf_url"]
+                               context:context];
+        [book setPdf:pdf];
+        
+        //Tags
+        NSArray *tags =[self getObjectFromKey:(@"tags")
+                                andDictionary:(dict)];
+        
+        for(NSString *obj in tags){
+            //Hacemos un trim a obj
+            NSString *trimmedTag = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            CROTag *tag=[CROTag tagWithName:trimmedTag
+                                    context:context];
+            [book addTagsObject:tag];
+        }
+    }
+    //Hacemos fetch de los tags
+     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[CROAuthor entityName]];
+    NSArray *array = [context executeFetchRequest:req error:nil];
+    for(CROAuthor *author in array){
+        NSLog(@"%@",author.name);
     }
     
     
-    //Creamos un array con las categorias ordenadas
-    NSArray *arrayOfTags=[auxDictionary allKeys];
-    //Ordenamos el array de las categorias
-    arrayOfTags= [arrayOfTags sortedArrayUsingFunction:mySort context:NULL];
+}
+   
+#pragma mark -Class Internal
+-(void) downloadFileWithData:(NSURL*)urlData
+                    withName:(NSString*)name{
     
-    return [[CROLibraryModel alloc]initWithArray:arrayOfTags withDictionary:auxDictionary];
-
+    NSData *data=[[NSData alloc ]initWithContentsOfURL:urlData];
+    [data writeToFile:(name) atomically:YES];
 }
-
--(CROBook*) getInitialBook:(CROLibraryModel*)model{
-    CROBook *book=nil;
-    if([[NSUserDefaults standardUserDefaults]objectForKey:(@"bookSelected")]!=nil){
-        book=[NSKeyedUnarchiver unarchiveObjectWithData:([[NSUserDefaults standardUserDefaults]objectForKey:(@"bookSelected")])];
-    }else{
-        if([[model.dictOfTags objectForKey:@"Favorites"] count]>0){
-            book=[[model.dictOfTags objectForKey:@"Favorites"] firstObject];
-        }else{
-            NSString *defaultTag=[model.arrayOfTagsSorted objectAtIndex:1];
-            book=[[model.dictOfTags objectForKey:(defaultTag)]firstObject];
-        }
-    }
-    return book;
+    
+    
+-(NSArray*) getObjectFromKey:(NSString*) key
+               andDictionary:(NSDictionary*)dictionary{
+    
+    NSString *value=[dictionary objectForKey:key];
+    return [value componentsSeparatedByString:@","];
 }
-
 
 
 

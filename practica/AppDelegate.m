@@ -7,9 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "CROLibraryTableViewController.h"
-#import "BookViewController.h"
+#import "CROCoreDataStack.h"
 #import "CRODataHandler.h"
+#import "CROBooksViewController.h"
+#import "CROBook.h"
+#import "CROTag.h"
+#import "ReaderDocument.h"
+#import "ReaderViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,27 +23,54 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *baseDocumentPath = [paths objectAtIndex:0];
+//    NSString *filePath = [baseDocumentPath stringByAppendingPathComponent:@"/temp.pdf"];
+//    NSData *data=[[NSData alloc ]initWithContentsOfURL:[NSURL URLWithString:@"http://eloquentjavascript.net/Eloquent_JavaScript.pdf"]];
+//    [data writeToFile:(filePath) atomically:YES];
+//    ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:nil];
+//    
+//    if (document != nil)
+//    {
+//        ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+//        //readerViewController.delegate = self;
+//        
+//        readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+//        
+//        UINavigationController *navVC=[[UINavigationController alloc]initWithRootViewController:readerViewController];
+//        self.window.rootViewController=navVC;
+//    }
     
-    //Obtenemos el array con Obj JSON parseados
+    //Creamos el CoreDataStack
+    self.model = [CROCoreDataStack coreDataStackWithModelName:@"Model"];
+    
+    //Llamamos a CRODataHandler
     CRODataHandler *dataHandler=[[CRODataHandler alloc]init];
-    NSArray *arrayJSON=[dataHandler getJsonArray];
+    NSArray *array=[dataHandler getJsonArray];
+    [dataHandler addJsonArray:array
+            toCoreDataContext:self.model.context];
     
-    //Bajamos imagenes si es necesario
-    [dataHandler downloadImagesFromJSONArray:arrayJSON];
+    //Sacamos un Fetch para los books
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:[CROTag entityName]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:CROTagAttributes.tagName
+                                                              ascending:YES]];
+                                
+    NSFetchedResultsController *results=[[NSFetchedResultsController alloc]initWithFetchRequest:request
+                                                                           managedObjectContext:self.model.context
+                                                                             sectionNameKeyPath:@"tagName" cacheName:nil];
+    //Creamos controlador de Books
+    CROBooksViewController *booksVC=[[CROBooksViewController alloc] initWithFetchedResultsController:results
+                                                                                               style:UITableViewStylePlain];
     
-    //Creamos el modelo
-    self.model=[dataHandler createModelFromJsonArray:(arrayJSON)];
-    self.model.bookSelected=[dataHandler getInitialBook:(self.model)];
     
-    //Configuramos la Universalidad de la Aplicacion
-    if([[UIDevice currentDevice] userInterfaceIdiom] ==UIUserInterfaceIdiomPad){
-        [self configureAppForIpadWithModel:(CROLibraryModel*)self.model];
-    }else{
-        [self configureAppForIphoneWithModel:(CROLibraryModel*)self.model];
-    }
+    UINavigationController *navVC=[[UINavigationController alloc]initWithRootViewController:booksVC];
+     self.window.rootViewController=navVC;
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -51,13 +82,6 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    NSDictionary *dict=self.model.dictOfTags;
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"bookDictionary"];
-    
-    CROBook *bookSelected=self.model.bookSelected;
-    NSData *dataBook = [NSKeyedArchiver archivedDataWithRootObject:bookSelected];
-    [[NSUserDefaults standardUserDefaults] setObject:dataBook forKey:@"bookSelected"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -69,46 +93,6 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.model.dictOfTags];
-     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"bookDictionary"];
     
-    CROBook *bookSelected=self.model.bookSelected;
-    NSData *dataBook = [NSKeyedArchiver archivedDataWithRootObject:bookSelected];
-    [[NSUserDefaults standardUserDefaults] setObject:dataBook forKey:@"bookSelected"];
 }
-
--(void) configureAppForIpadWithModel:(CROLibraryModel*)model{
-    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(model)
-                                                                                       withStyle:UITableViewStylePlain];
-    BookViewController *vcBook=[[BookViewController alloc]initWithBook:(model.bookSelected)];
-    //Asignamos delegados
-    tableVC.delegate=vcBook;
-    
-    
-    UINavigationController *navLeft=[[UINavigationController alloc]initWithRootViewController:tableVC];
-    UINavigationController *navRight=[[UINavigationController alloc]initWithRootViewController:vcBook];
-    
-    
-    UISplitViewController *vcSplit=[[UISplitViewController alloc]init];
-    vcSplit.delegate=vcBook;
-    [vcSplit setViewControllers:(@[navLeft,navRight])];
-    self.window.rootViewController = vcSplit;
-}
-
--(void) configureAppForIphoneWithModel:(CROLibraryModel*)model{
-    //Creamos el controlador
-    CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(model)
-                                                                                       withStyle:UITableViewStylePlain];
-   
-    //Creaoms el combinador
-    UINavigationController *navVC=[[UINavigationController alloc]init];
-    [navVC pushViewController:tableVC animated:(YES)];
-    
-    //Asiganamos delegados
-    tableVC.delegate=tableVC;
-    
-    //Lo hacemos root
-    self.window.rootViewController = navVC;
-}
-
 @end
