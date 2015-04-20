@@ -58,7 +58,7 @@ static NSString *cellId = @"NoteCellId";
     [cell observeNote:note];
     
     
-    // Devolcerla
+    // Devolverla
     return cell;
 }
 
@@ -69,6 +69,14 @@ static NSString *cellId = @"NoteCellId";
     [self.navigationController pushViewController:newNoteVC
                                          animated:YES];
     
+}
+
+-(void) collectionView:(UICollectionView *)collectionView
+didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CRONote *note =[self.fetchedResultsController objectAtIndexPath:indexPath];
+    NoteViewController *noteVC=[[NoteViewController alloc]initWithNote:note];
+    [self.navigationController pushViewController:noteVC animated:true];
 }
 
 @end

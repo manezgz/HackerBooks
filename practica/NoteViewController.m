@@ -56,8 +56,6 @@
     //Sync modelo y vista
     NSDateFormatter *fmt=[NSDateFormatter new];
     fmt.dateStyle=NSDateFormatterLongStyle;
-    
-    self.creationDateLabel.text=[fmt stringFromDate:self.note.creationDate];
     self.modificationDateLabel.text=[fmt stringFromDate:self.note.modificationDate];
     self.noteTitleView.text=self.note.title;
     self.noteView.text=self.note.noteText;
@@ -88,7 +86,8 @@
         // vista -> modelo
         self.note.noteText = self.noteView.text;
         self.note.title=self.noteTitleView.text;
-        self.note.photo.photo = UIImageJPEGRepresentation(self.imageView.image, 0.9);
+        NSData *data=UIImageJPEGRepresentation(self.imageView.image, 0.9);
+        self.note.photo.photo = data;
         self.note.modificationDate =[NSDate date];
     }
 }

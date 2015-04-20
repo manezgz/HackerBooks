@@ -12,12 +12,12 @@
 #import "CROPhoto.h"
 
 @interface CRONoteCellView ()
-@property (strong, nonatomic) CRONote* note;
+@property (strong, nonatomic) CRONote *note;
 @end
 @implementation CRONoteCellView
 
 +(NSArray*) keys{
-    return @[@"photo.photo", @"title", @"modificationDate"];
+    return @[@"modificationDate"];
 }
 -(void) observeNote:(CRONote *) note{
     

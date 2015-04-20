@@ -137,7 +137,7 @@ UIActivityIndicatorView *activityIndicator;
                              sortDescriptorWithKey:CRONoteAttributes.modificationDate
                              ascending:NO]];
     
-    req.predicate = [NSPredicate predicateWithFormat:@"book == %@", self.book];
+    req.predicate = [NSPredicate predicateWithFormat:@"books == %@", self.book];
     
     // Fetched Results Controller
     NSFetchedResultsController *fc = [[NSFetchedResultsController alloc]
@@ -151,7 +151,7 @@ UIActivityIndicatorView *activityIndicator;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
-    layout.itemSize = CGSizeMake(140, 150);
+    layout.itemSize = CGSizeMake(120, 150);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
     // View controller
