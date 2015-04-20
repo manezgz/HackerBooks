@@ -21,13 +21,6 @@
 		3A88C1981AC84EBD00D9B548 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A88C1961AC84EBD00D9B548 /* LaunchScreen.xib */; };
 		3A88C1A41AC84EBD00D9B548 /* practicaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C1A31AC84EBD00D9B548 /* practicaTests.m */; };
 		3AB4691A1ADDA24D005A95CA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469181ADDA24D005A95CA /* Model.xcdatamodeld */; };
-		3AB469371ADDB6CA005A95CA /* _CROAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4691C1ADDB6CA005A95CA /* _CROAuthor.m */; };
-		3AB469381ADDB6CA005A95CA /* _CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4691E1ADDB6CA005A95CA /* _CROBook.m */; };
-		3AB469391ADDB6CA005A95CA /* _CROLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469201ADDB6CA005A95CA /* _CROLocation.m */; };
-		3AB4693A1ADDB6CA005A95CA /* _CRONote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469221ADDB6CA005A95CA /* _CRONote.m */; };
-		3AB4693B1ADDB6CA005A95CA /* _CROPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469241ADDB6CA005A95CA /* _CROPdf.m */; };
-		3AB4693C1ADDB6CA005A95CA /* _CROPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469261ADDB6CA005A95CA /* _CROPhoto.m */; };
-		3AB4693D1ADDB6CA005A95CA /* _CROTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469281ADDB6CA005A95CA /* _CROTag.m */; };
 		3AB4693E1ADDB6CA005A95CA /* CROAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4692A1ADDB6CA005A95CA /* CROAuthor.m */; };
 		3AB4693F1ADDB6CA005A95CA /* CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4692C1ADDB6CA005A95CA /* CROBook.m */; };
 		3AB469401ADDB6CA005A95CA /* CROLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4692E1ADDB6CA005A95CA /* CROLocation.m */; };
@@ -42,6 +35,13 @@
 		3AFB23AD1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23AC1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m */; };
 		3AFB23B01AE575520095A5E3 /* CRONotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23AF1AE575520095A5E3 /* CRONotesViewController.m */; };
 		3AFB23B21AE586610095A5E3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFB23B11AE586610095A5E3 /* MapKit.framework */; };
+		3AFB23C11AE58C340095A5E3 /* _CROAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23B41AE58C340095A5E3 /* _CROAuthor.m */; };
+		3AFB23C21AE58C340095A5E3 /* _CROBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23B61AE58C340095A5E3 /* _CROBook.m */; };
+		3AFB23C31AE58C340095A5E3 /* _CROLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23B81AE58C340095A5E3 /* _CROLocation.m */; };
+		3AFB23C41AE58C340095A5E3 /* _CRONote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23BA1AE58C340095A5E3 /* _CRONote.m */; };
+		3AFB23C51AE58C340095A5E3 /* _CROPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23BC1AE58C340095A5E3 /* _CROPdf.m */; };
+		3AFB23C61AE58C340095A5E3 /* _CROPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23BE1AE58C340095A5E3 /* _CROPhoto.m */; };
+		3AFB23C71AE58C340095A5E3 /* _CROTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23C01AE58C340095A5E3 /* _CROTag.m */; };
 		4843AC796115523016E2A354 /* libPods-practica.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BC569DEF8D1ECE3E144795 /* libPods-practica.a */; };
 /* End PBXBuildFile section */
 
@@ -80,20 +80,6 @@
 		3A88C1A21AC84EBD00D9B548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A88C1A31AC84EBD00D9B548 /* practicaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = practicaTests.m; sourceTree = "<group>"; };
 		3AB469191ADDA24D005A95CA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		3AB4691B1ADDB6CA005A95CA /* _CROAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROAuthor.h; sourceTree = "<group>"; };
-		3AB4691C1ADDB6CA005A95CA /* _CROAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROAuthor.m; sourceTree = "<group>"; };
-		3AB4691D1ADDB6CA005A95CA /* _CROBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROBook.h; sourceTree = "<group>"; };
-		3AB4691E1ADDB6CA005A95CA /* _CROBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROBook.m; sourceTree = "<group>"; };
-		3AB4691F1ADDB6CA005A95CA /* _CROLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROLocation.h; sourceTree = "<group>"; };
-		3AB469201ADDB6CA005A95CA /* _CROLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROLocation.m; sourceTree = "<group>"; };
-		3AB469211ADDB6CA005A95CA /* _CRONote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CRONote.h; sourceTree = "<group>"; };
-		3AB469221ADDB6CA005A95CA /* _CRONote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CRONote.m; sourceTree = "<group>"; };
-		3AB469231ADDB6CA005A95CA /* _CROPdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROPdf.h; sourceTree = "<group>"; };
-		3AB469241ADDB6CA005A95CA /* _CROPdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROPdf.m; sourceTree = "<group>"; };
-		3AB469251ADDB6CA005A95CA /* _CROPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROPhoto.h; sourceTree = "<group>"; };
-		3AB469261ADDB6CA005A95CA /* _CROPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROPhoto.m; sourceTree = "<group>"; };
-		3AB469271ADDB6CA005A95CA /* _CROTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROTag.h; sourceTree = "<group>"; };
-		3AB469281ADDB6CA005A95CA /* _CROTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROTag.m; sourceTree = "<group>"; };
 		3AB469291ADDB6CA005A95CA /* CROAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROAuthor.h; sourceTree = "<group>"; };
 		3AB4692A1ADDB6CA005A95CA /* CROAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROAuthor.m; sourceTree = "<group>"; };
 		3AB4692B1ADDB6CA005A95CA /* CROBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBook.h; sourceTree = "<group>"; };
@@ -120,6 +106,20 @@
 		3AFB23AE1AE575520095A5E3 /* CRONotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRONotesViewController.h; sourceTree = "<group>"; };
 		3AFB23AF1AE575520095A5E3 /* CRONotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRONotesViewController.m; sourceTree = "<group>"; };
 		3AFB23B11AE586610095A5E3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3AFB23B31AE58C340095A5E3 /* _CROAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROAuthor.h; sourceTree = "<group>"; };
+		3AFB23B41AE58C340095A5E3 /* _CROAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROAuthor.m; sourceTree = "<group>"; };
+		3AFB23B51AE58C340095A5E3 /* _CROBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROBook.h; sourceTree = "<group>"; };
+		3AFB23B61AE58C340095A5E3 /* _CROBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROBook.m; sourceTree = "<group>"; };
+		3AFB23B71AE58C340095A5E3 /* _CROLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROLocation.h; sourceTree = "<group>"; };
+		3AFB23B81AE58C340095A5E3 /* _CROLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROLocation.m; sourceTree = "<group>"; };
+		3AFB23B91AE58C340095A5E3 /* _CRONote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CRONote.h; sourceTree = "<group>"; };
+		3AFB23BA1AE58C340095A5E3 /* _CRONote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CRONote.m; sourceTree = "<group>"; };
+		3AFB23BB1AE58C340095A5E3 /* _CROPdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROPdf.h; sourceTree = "<group>"; };
+		3AFB23BC1AE58C340095A5E3 /* _CROPdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROPdf.m; sourceTree = "<group>"; };
+		3AFB23BD1AE58C340095A5E3 /* _CROPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROPhoto.h; sourceTree = "<group>"; };
+		3AFB23BE1AE58C340095A5E3 /* _CROPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROPhoto.m; sourceTree = "<group>"; };
+		3AFB23BF1AE58C340095A5E3 /* _CROTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CROTag.h; sourceTree = "<group>"; };
+		3AFB23C01AE58C340095A5E3 /* _CROTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CROTag.m; sourceTree = "<group>"; };
 		66BC569DEF8D1ECE3E144795 /* libPods-practica.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-practica.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6DEC70EF23F3F5FDD8BCEF /* Pods-practica.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-practica.release.xcconfig"; path = "Pods/Target Support Files/Pods-practica/Pods-practica.release.xcconfig"; sourceTree = "<group>"; };
 		DF81E3BB85F01D6B71DB2B6E /* Pods-practica.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-practica.debug.xcconfig"; path = "Pods/Target Support Files/Pods-practica/Pods-practica.debug.xcconfig"; sourceTree = "<group>"; };
@@ -243,21 +243,21 @@
 		3AB469451ADDB6DB005A95CA /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
+				3AFB23B31AE58C340095A5E3 /* _CROAuthor.h */,
+				3AFB23B41AE58C340095A5E3 /* _CROAuthor.m */,
+				3AFB23B51AE58C340095A5E3 /* _CROBook.h */,
+				3AFB23B61AE58C340095A5E3 /* _CROBook.m */,
+				3AFB23B71AE58C340095A5E3 /* _CROLocation.h */,
+				3AFB23B81AE58C340095A5E3 /* _CROLocation.m */,
+				3AFB23B91AE58C340095A5E3 /* _CRONote.h */,
+				3AFB23BA1AE58C340095A5E3 /* _CRONote.m */,
+				3AFB23BB1AE58C340095A5E3 /* _CROPdf.h */,
+				3AFB23BC1AE58C340095A5E3 /* _CROPdf.m */,
+				3AFB23BD1AE58C340095A5E3 /* _CROPhoto.h */,
+				3AFB23BE1AE58C340095A5E3 /* _CROPhoto.m */,
+				3AFB23BF1AE58C340095A5E3 /* _CROTag.h */,
+				3AFB23C01AE58C340095A5E3 /* _CROTag.m */,
 				3AB469181ADDA24D005A95CA /* Model.xcdatamodeld */,
-				3AB4691B1ADDB6CA005A95CA /* _CROAuthor.h */,
-				3AB4691C1ADDB6CA005A95CA /* _CROAuthor.m */,
-				3AB4691D1ADDB6CA005A95CA /* _CROBook.h */,
-				3AB4691E1ADDB6CA005A95CA /* _CROBook.m */,
-				3AB4691F1ADDB6CA005A95CA /* _CROLocation.h */,
-				3AB469201ADDB6CA005A95CA /* _CROLocation.m */,
-				3AB469211ADDB6CA005A95CA /* _CRONote.h */,
-				3AB469221ADDB6CA005A95CA /* _CRONote.m */,
-				3AB469231ADDB6CA005A95CA /* _CROPdf.h */,
-				3AB469241ADDB6CA005A95CA /* _CROPdf.m */,
-				3AB469251ADDB6CA005A95CA /* _CROPhoto.h */,
-				3AB469261ADDB6CA005A95CA /* _CROPhoto.m */,
-				3AB469271ADDB6CA005A95CA /* _CROTag.h */,
-				3AB469281ADDB6CA005A95CA /* _CROTag.m */,
 				3AB469291ADDB6CA005A95CA /* CROAuthor.h */,
 				3AB4692A1ADDB6CA005A95CA /* CROAuthor.m */,
 				3AB4692B1ADDB6CA005A95CA /* CROBook.h */,
@@ -450,31 +450,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AB4693E1ADDB6CA005A95CA /* CROAuthor.m in Sources */,
-				3AB4693A1ADDB6CA005A95CA /* _CRONote.m in Sources */,
+				3AFB23C21AE58C340095A5E3 /* _CROBook.m in Sources */,
 				3AB469401ADDB6CA005A95CA /* CROLocation.m in Sources */,
-				3AB4693B1ADDB6CA005A95CA /* _CROPdf.m in Sources */,
+				3AFB23C61AE58C340095A5E3 /* _CROPhoto.m in Sources */,
 				3A343A201AE2B4EF008465EA /* NoteViewController.m in Sources */,
+				3AFB23C51AE58C340095A5E3 /* _CROPdf.m in Sources */,
 				3AB4693F1ADDB6CA005A95CA /* CROBook.m in Sources */,
 				3A343A111AE1CA68008465EA /* BookViewController.m in Sources */,
-				3AB4693C1ADDB6CA005A95CA /* _CROPhoto.m in Sources */,
-				3AB469391ADDB6CA005A95CA /* _CROLocation.m in Sources */,
 				3AFB23B01AE575520095A5E3 /* CRONotesViewController.m in Sources */,
 				3A88C1931AC84EBD00D9B548 /* AppDelegate.m in Sources */,
 				3A88C1901AC84EBD00D9B548 /* main.m in Sources */,
+				3AFB23C11AE58C340095A5E3 /* _CROAuthor.m in Sources */,
 				3AFB23AA1AE571530095A5E3 /* CRONoteCellView.m in Sources */,
+				3AFB23C71AE58C340095A5E3 /* _CROTag.m in Sources */,
 				3AFB23AD1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m in Sources */,
+				3AFB23C31AE58C340095A5E3 /* _CROLocation.m in Sources */,
 				3AB469441ADDB6CA005A95CA /* CROTag.m in Sources */,
 				3AB469421ADDB6CA005A95CA /* CROPdf.m in Sources */,
-				3AB4693D1ADDB6CA005A95CA /* _CROTag.m in Sources */,
-				3AB469381ADDB6CA005A95CA /* _CROBook.m in Sources */,
 				3AB469411ADDB6CA005A95CA /* CRONote.m in Sources */,
 				3A343A021AE06061008465EA /* CROCoreDataTableViewController.m in Sources */,
 				3AB469481ADDBDAB005A95CA /* CROCoreDataStack.m in Sources */,
-				3AB469371ADDB6CA005A95CA /* _CROAuthor.m in Sources */,
 				3A343A151AE28E7D008465EA /* PdfViewController.m in Sources */,
 				3AB4694B1ADF1938005A95CA /* CRODataHandler.m in Sources */,
 				3AB4691A1ADDA24D005A95CA /* Model.xcdatamodeld in Sources */,
 				3AB469431ADDB6CA005A95CA /* CROPhoto.m in Sources */,
+				3AFB23C41AE58C340095A5E3 /* _CRONote.m in Sources */,
 				3A343A051AE060E6008465EA /* CROBooksViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
