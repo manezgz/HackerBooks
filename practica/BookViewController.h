@@ -11,10 +11,15 @@
 #import "CROTag.h"
 #import "CROPdf.h"
 
+@protocol CROFavoriteChangedInBook <NSObject>
+
+- (void)favoriteChangedInbook;
+
+@end
+
 @interface BookViewController : UIViewController
 
-
-
+@property (nonatomic,assign)  id <CROFavoriteChangedInBook> delegate;
 @property(strong,nonatomic) CROBook *book;
 @property(weak, nonatomic) IBOutlet UIImageView *bookImage;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;

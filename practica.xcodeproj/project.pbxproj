@@ -30,6 +30,8 @@
 		3AB469441ADDB6CA005A95CA /* CROTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469361ADDB6CA005A95CA /* CROTag.m */; };
 		3AB469481ADDBDAB005A95CA /* CROCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB469471ADDBDAB005A95CA /* CROCoreDataStack.m */; };
 		3AB4694B1ADF1938005A95CA /* CRODataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4694A1ADF1938005A95CA /* CRODataHandler.m */; };
+		3ADF3B8F1AE8485E0030A30D /* CROPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADF3B8D1AE8485E0030A30D /* CROPhotoViewController.m */; };
+		3ADF3B901AE8485E0030A30D /* CROPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADF3B8E1AE8485E0030A30D /* CROPhotoViewController.xib */; };
 		3AFB23A61AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFB23A51AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib */; };
 		3AFB23AA1AE571530095A5E3 /* CRONoteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23A91AE571530095A5E3 /* CRONoteCellView.m */; };
 		3AFB23AD1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB23AC1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m */; };
@@ -98,6 +100,9 @@
 		3AB469471ADDBDAB005A95CA /* CROCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROCoreDataStack.m; sourceTree = "<group>"; };
 		3AB469491ADF1938005A95CA /* CRODataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRODataHandler.h; sourceTree = "<group>"; };
 		3AB4694A1ADF1938005A95CA /* CRODataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRODataHandler.m; sourceTree = "<group>"; };
+		3ADF3B8C1AE8485E0030A30D /* CROPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROPhotoViewController.h; sourceTree = "<group>"; };
+		3ADF3B8D1AE8485E0030A30D /* CROPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROPhotoViewController.m; sourceTree = "<group>"; };
+		3ADF3B8E1AE8485E0030A30D /* CROPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CROPhotoViewController.xib; sourceTree = "<group>"; };
 		3AFB23A51AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRONoteCollectionViewCell.xib; sourceTree = "<group>"; };
 		3AFB23A81AE571530095A5E3 /* CRONoteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRONoteCellView.h; sourceTree = "<group>"; };
 		3AFB23A91AE571530095A5E3 /* CRONoteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRONoteCellView.m; sourceTree = "<group>"; };
@@ -164,6 +169,9 @@
 				3A343A101AE1CA68008465EA /* BookViewController.xib */,
 				3A343A131AE28E7D008465EA /* PdfViewController.h */,
 				3A343A141AE28E7D008465EA /* PdfViewController.m */,
+				3ADF3B8C1AE8485E0030A30D /* CROPhotoViewController.h */,
+				3ADF3B8D1AE8485E0030A30D /* CROPhotoViewController.m */,
+				3ADF3B8E1AE8485E0030A30D /* CROPhotoViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -397,6 +405,7 @@
 				3AFB23A61AE56FD90095A5E3 /* CRONoteCollectionViewCell.xib in Resources */,
 				3A343A121AE1CA68008465EA /* BookViewController.xib in Resources */,
 				3A88C1981AC84EBD00D9B548 /* LaunchScreen.xib in Resources */,
+				3ADF3B901AE8485E0030A30D /* CROPhotoViewController.xib in Resources */,
 				3A343A211AE2B4EF008465EA /* NoteViewController.xib in Resources */,
 				3A88C1951AC84EBD00D9B548 /* Images.xcassets in Resources */,
 			);
@@ -461,6 +470,7 @@
 				3A88C1931AC84EBD00D9B548 /* AppDelegate.m in Sources */,
 				3A88C1901AC84EBD00D9B548 /* main.m in Sources */,
 				3AFB23C11AE58C340095A5E3 /* _CROAuthor.m in Sources */,
+				3ADF3B8F1AE8485E0030A30D /* CROPhotoViewController.m in Sources */,
 				3AFB23AA1AE571530095A5E3 /* CRONoteCellView.m in Sources */,
 				3AFB23C71AE58C340095A5E3 /* _CROTag.m in Sources */,
 				3AFB23AD1AE5750D0095A5E3 /* CROCoreDataCollectionViewController.m in Sources */,

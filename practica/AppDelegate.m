@@ -56,17 +56,31 @@
     [dataHandler addJsonArray:array
             toCoreDataContext:self.model.context];
     
-    //Sacamos un Fetch para los books
+    //Sacamos un Fetch para los tags
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:[CROTag entityName]];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:CROTagAttributes.tagName
                                                               ascending:YES]];
                                 
-    NSFetchedResultsController *results=[[NSFetchedResultsController alloc]initWithFetchRequest:request
+    NSFetchedResultsController *fcTags=[[NSFetchedResultsController alloc]initWithFetchRequest:request
                                                                            managedObjectContext:self.model.context
                                                                              sectionNameKeyPath:@"tagName" cacheName:nil];
+    
+    //Configuramos el NSFetchController Para Books
+    NSFetchRequest *requestBooks=[NSFetchRequest fetchRequestWithEntityName:[CROBook entityName]];
+    
+    requestBooks.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:CROBookAttributes.title
+                                                              ascending:YES]];
+    
+    NSFetchedResultsController *fcBooks=[[NSFetchedResultsController alloc]initWithFetchRequest:requestBooks
+                                               managedObjectContext:self.model.context
+                                                 sectionNameKeyPath:nil
+                                                          cacheName:nil];
+
+    
     //Creamos controlador de Books
-    CROBooksViewController *booksVC=[[CROBooksViewController alloc] initWithFetchedResultsController:results
-                                                                                               style:UITableViewStylePlain];
+    CROBooksViewController *booksVC=[[CROBooksViewController alloc] initWithFetchedResultsControllerTags:fcTags
+                                                                       withFetchedResultsControllerBooks:fcBooks
+                                                                                                   style:UITableViewStylePlain];
     
     
     UINavigationController *navVC=[[UINavigationController alloc]initWithRootViewController:booksVC];

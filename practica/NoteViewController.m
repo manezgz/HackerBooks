@@ -7,6 +7,7 @@
 //
 
 #import "NoteViewController.h"
+#import "CROPhotoViewController.h"
 
 @interface NoteViewController ()
 @property (nonatomic) BOOL new;
@@ -74,6 +75,12 @@
         self.navigationItem.rightBarButtonItem = cancel;
     }
     
+    // Añadimos un gesture recognizer a la foto
+    self.imageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(displayDetailPhoto:)];
+    [self.imageView addGestureRecognizer:tap];
+    
     
 }
 
@@ -101,6 +108,17 @@
 -(void) cancel:(id)sender{
     self.deleteNote = YES;
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Actions
+-(void)displayDetailPhoto:(id) sender{
+    
+    NSLog(@"Tap in Image");
+    CROPhotoViewController *pVC = [[CROPhotoViewController alloc] initWithPhoto:self.note.photo];
+    
+    [self.navigationController pushViewController:pVC
+                                         animated:YES];
+    
 }
 
 /*

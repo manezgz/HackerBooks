@@ -7,7 +7,14 @@
 //
 
 #import "CROCoreDataTableViewController.h"
+#import "BookViewController.h"
 
-@interface CROBooksViewController : CROCoreDataTableViewController
+@interface CROBooksViewController : CROCoreDataTableViewController<CROFavoriteChangedInBook>
+
+@property (strong, nonatomic) UISearchController *searchController;
+
+-(instancetype) initWithFetchedResultsControllerTags:(NSFetchedResultsController *)fetchControllerTags
+                   withFetchedResultsControllerBooks:(NSFetchedResultsController *) fetchControllerBooks
+                                               style:(UITableViewStyle)aStyle;
 
 @end

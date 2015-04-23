@@ -18,6 +18,8 @@
 
 @implementation BookViewController
 
+@synthesize delegate;
+
 UIActivityIndicatorView *activityIndicator;
 
 -(instancetype) initWithBook:(CROBook*) book
@@ -226,8 +228,7 @@ UIActivityIndicatorView *activityIndicator;
         [self.book addTagsObject:self.favoriteTag];
     }else{
         [self.book removeTagsObject:self.favoriteTag];
-    }
-    
-
+    }    
+    [self.delegate favoriteChangedInbook];
 }
 @end
