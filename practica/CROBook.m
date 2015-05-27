@@ -57,6 +57,20 @@
     return self;
 }
 
+-(void) changeFavorite{
+    //Cambiamos
+    self.isFavorite=!self.isFavorite;
+    
+    //Notificamos
+    NSNotification *notification=[NSNotification notificationWithName:(BOOK_FAVORITE_CHANGED)
+                                                               object:(self)
+                                                             userInfo:(@{BOOK_KEY:self}
+                                                                       )];
+    [[NSNotificationCenter defaultCenter]postNotification:(notification)];
+
+    
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.title forKey:@"title"];
     [encoder encodeObject:self.image forKey:@"image"];

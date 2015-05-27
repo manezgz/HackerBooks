@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A5AC3571ACF51CE004779EF /* BookViewControlleripad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AC3561ACF51CE004779EF /* BookViewControlleripad.xib */; };
-		3A65BA9A1AC9FB5400FDB280 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A65BA981AC9FB5400FDB280 /* BookViewController.m */; };
-		3A65BA9B1AC9FB5400FDB280 /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A65BA991AC9FB5400FDB280 /* BookViewController.xib */; };
+		3A3443331B13DD4B00BED458 /* CROBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3443311B13DD4B00BED458 /* CROBookViewController.m */; };
+		3A3443341B13DD4B00BED458 /* CROBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3443321B13DD4B00BED458 /* CROBookViewController.xib */; };
 		3A65BA9F1ACA0F5D00FDB280 /* CROBookWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A65BA9D1ACA0F5D00FDB280 /* CROBookWebViewController.m */; };
 		3A65BAA01ACA0F5D00FDB280 /* CROBookWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */; };
 		3A88C1901AC84EBD00D9B548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88C18F1AC84EBD00D9B548 /* main.m */; };
@@ -34,10 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A5AC3561ACF51CE004779EF /* BookViewControlleripad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewControlleripad.xib; sourceTree = "<group>"; };
-		3A65BA971AC9FB5400FDB280 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
-		3A65BA981AC9FB5400FDB280 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
-		3A65BA991AC9FB5400FDB280 /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
+		3A3443301B13DD4B00BED458 /* CROBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBookViewController.h; sourceTree = "<group>"; };
+		3A3443311B13DD4B00BED458 /* CROBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROBookViewController.m; sourceTree = "<group>"; };
+		3A3443321B13DD4B00BED458 /* CROBookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CROBookViewController.xib; sourceTree = "<group>"; };
 		3A65BA9C1ACA0F5D00FDB280 /* CROBookWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CROBookWebViewController.h; sourceTree = "<group>"; };
 		3A65BA9D1ACA0F5D00FDB280 /* CROBookWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CROBookWebViewController.m; sourceTree = "<group>"; };
 		3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CROBookWebViewController.xib; sourceTree = "<group>"; };
@@ -154,13 +152,12 @@
 			children = (
 				3A88C1B41AC851F400D9B548 /* CROLibraryTableViewController.h */,
 				3A88C1B51AC851F400D9B548 /* CROLibraryTableViewController.m */,
-				3A65BA971AC9FB5400FDB280 /* BookViewController.h */,
-				3A65BA981AC9FB5400FDB280 /* BookViewController.m */,
-				3A65BA991AC9FB5400FDB280 /* BookViewController.xib */,
-				3A5AC3561ACF51CE004779EF /* BookViewControlleripad.xib */,
 				3A65BA9C1ACA0F5D00FDB280 /* CROBookWebViewController.h */,
 				3A65BA9D1ACA0F5D00FDB280 /* CROBookWebViewController.m */,
 				3A65BA9E1ACA0F5D00FDB280 /* CROBookWebViewController.xib */,
+				3A3443301B13DD4B00BED458 /* CROBookViewController.h */,
+				3A3443311B13DD4B00BED458 /* CROBookViewController.m */,
+				3A3443321B13DD4B00BED458 /* CROBookViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -257,8 +254,7 @@
 				3A88C1981AC84EBD00D9B548 /* LaunchScreen.xib in Resources */,
 				3A65BAA01ACA0F5D00FDB280 /* CROBookWebViewController.xib in Resources */,
 				3A88C1951AC84EBD00D9B548 /* Images.xcassets in Resources */,
-				3A5AC3571ACF51CE004779EF /* BookViewControlleripad.xib in Resources */,
-				3A65BA9B1AC9FB5400FDB280 /* BookViewController.xib in Resources */,
+				3A3443341B13DD4B00BED458 /* CROBookViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,8 +276,8 @@
 				3A88C1931AC84EBD00D9B548 /* AppDelegate.m in Sources */,
 				3A65BA9F1ACA0F5D00FDB280 /* CROBookWebViewController.m in Sources */,
 				3A88C1901AC84EBD00D9B548 /* main.m in Sources */,
-				3A65BA9A1AC9FB5400FDB280 /* BookViewController.m in Sources */,
 				3A88C1B31AC84F9A00D9B548 /* CROLibraryModel.m in Sources */,
+				3A3443331B13DD4B00BED458 /* CROBookViewController.m in Sources */,
 				3A88C1AF1AC84F4700D9B548 /* CROBook.m in Sources */,
 				3AED15C41ACEC214000CBF4A /* CRODataHandler.m in Sources */,
 			);

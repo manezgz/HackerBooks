@@ -7,7 +7,7 @@
 //
 
 #import "CROLibraryTableViewController.h"
-#import "BookViewController.h"
+#import "CROBookViewController.h"
 
 @interface CROLibraryTableViewController ()
 
@@ -23,8 +23,6 @@
         self.title = @"Hacker Books";
         _arrayOfTags=self.model.arrayOfTagsSorted;
         
-        self.tableView.delegate=self;
-        
         //Le damos de alta como observer de la notificación de que se aha modificado un libro favorito
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(modelDidChange:)
@@ -32,6 +30,10 @@
                                                    object:nil];
     }
     return self;
+}
+
+-(void)viewDidLoad{
+    self.edgesForExtendedLayout=UIRectEdgeNone;
 }
 
 
@@ -130,6 +132,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     
     //actualizamos el puntero a libro seleccionado
     self.model.bookSelected=book;
+    // Mando también la notificación
+    [self postNotificationThatSelectedBookDidChange:book];
 
 }
 
@@ -138,8 +142,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                        atIndexPath:(NSIndexPath *)indexPath{
     
     //creamos un BookViewController y le casco un Push
-    BookViewController *bookVC=[[BookViewController alloc]initWithBook:aBook];
+    CROBookViewController *bookVC=[[CROBookViewController alloc]initWithBook:aBook];
     [self.navigationController pushViewController:bookVC animated:(YES)];
+    
 }
 
 #pragma mark -Notifications
@@ -161,6 +166,19 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     }
     
     [self.tableView reloadData];
+}
+
+-(void) postNotificationThatSelectedBookDidChange:(CROBook*)selectedBook{
+    
+    // Mando también la notificación
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    NSNotification *n = [NSNotification
+                         notificationWithName:BOOK_DID_CHANGE_NOTIFICATION
+                         object:self
+                         userInfo:@{BOOK_KEY:selectedBook}];
+    [nc postNotification:n];
+    
 }
 
 

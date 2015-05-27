@@ -7,7 +7,6 @@
 //
 
 #import "CROBookWebViewController.h"
-#import "BookViewController.h"
 
 @interface CROBookWebViewController ()
 
@@ -35,6 +34,15 @@
     self.browser.delegate=self;
     [self.activityView setHidden:NO];
     [self.activityView startAnimating];
+    // Alta en notificaciones de library
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(notifyThatBookDidChange:)
+               name:BOOK_DID_CHANGE_NOTIFICATION
+             object:nil];
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars=NO;
+    self.automaticallyAdjustsScrollViewInsets=NO;
 
 }
 
@@ -42,10 +50,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.browser.delegate=self;
-    self.edgesForExtendedLayout=UIRectEdgeNone;
+}
+
+#pragma mark - Notificaciones
+-(void) notifyThatBookDidChange:(NSNotification *) notification{
+    
+    // sacamos el nuevo libro
+    CROBook *book = [notification.userInfo objectForKey:BOOK_KEY];
+    self.book = book;
+    [self loadPDF];
 }
 
 -(void)loadPDF{
+    self.navigationController.title=self.book.title;
     //Lo primero comprobamos si el pdf ya ha sido descargado
     NSData *pdfData=[[NSData alloc ]initWithContentsOfURL:(self.book.pdfProxy)];
     if(pdfData==nil){

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CROLibraryModel.h"
 #define BOOK_SELECTED_CHANGED @"bookSelectedChanged"
+#define BOOK_DID_CHANGE_NOTIFICATION @"AGTBOOK_DID_CHANGE_NOTIFICATION"
 
 @class CROLibraryTableViewController;
 

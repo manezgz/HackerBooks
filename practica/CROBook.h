@@ -5,6 +5,9 @@
 //  Created by Jose Manuel Franco on 27/3/15.
 //  Copyright (c) 2015 Jose Manuel Franco. All rights reserved.
 //
+#define BOOK_FAVORITE_CHANGED @"bookFavoriteChanged"
+#define BOOK_KEY @"book"
+#define INDEX_PATH_KEY @"indexPath"
 
 #import <Foundation/Foundation.h>
 @import UIKit;
@@ -24,6 +27,8 @@
         withAuthors:(NSArray*)authors
            withTags:(NSArray*)tags
        withFavorite:(BOOL)isFavorite;
+
+-(void) changeFavorite;
 
 -(NSURL*) imageProxy;
 

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CROLibraryTableViewController.h"
-#import "BookViewController.h"
+#import "CROBookViewController.h"
 #import "CRODataHandler.h"
 
 @interface AppDelegate ()
@@ -80,9 +80,7 @@
 -(void) configureAppForIpadWithModel:(CROLibraryModel*)model{
     CROLibraryTableViewController *tableVC=[[CROLibraryTableViewController alloc]initWithLibrary:(model)
                                                                                        withStyle:UITableViewStylePlain];
-    BookViewController *vcBook=[[BookViewController alloc]initWithBook:(model.bookSelected)];
-    //Asignamos delegados
-    tableVC.delegate=vcBook;
+    CROBookViewController *vcBook=[[CROBookViewController alloc]initWithBook:(model.bookSelected)];
     
     
     UINavigationController *navLeft=[[UINavigationController alloc]initWithRootViewController:tableVC];
@@ -91,6 +89,7 @@
     
     UISplitViewController *vcSplit=[[UISplitViewController alloc]init];
     vcSplit.delegate=vcBook;
+    tableVC.delegate = vcBook;
     [vcSplit setViewControllers:(@[navLeft,navRight])];
     self.window.rootViewController = vcSplit;
 }
